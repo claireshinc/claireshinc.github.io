@@ -7,7 +7,7 @@ categories: jekyll update
 
 Every business needs an infrastructure provider, and trading is no different. For hedge funds, trading firms, market makers, and asset managers, it is too expensive to operate directly on exchanges where the products trade on. Thus in this case, infrastructure providers would be entities that enable such participation in markets without the membership at an exchange; Prime Brokers (PBs) do exactly this. They lend stocks, provide leverage, clear trades, hold collateral, and connect clients to exchanges.
 
-![Prime Brokerage Diagram](/docs/assets/img/primebrokerdiagram.png)
+![Prime Brokerage Diagram](/_posts/assets/img/primebrokerdiagram.png)
 
 To further drive home the importance of such entities, let's come up with scenarios that would happen without them. 
 
