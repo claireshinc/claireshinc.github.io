@@ -21,7 +21,7 @@
 title: Claire Shin
 email: js9523@princeton.edu
 description: >- # this means to ignore newlines until "baseurl:"
-  This is a blog where I update amazing things that I had the chance to get my hands on. 
+  amazing things that I had the chance to get my hands on. 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://claireshinc.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
