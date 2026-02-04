@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ideas Made Visible — Philosophy as Mathematics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a0e; color: #e8e6e1; font-family: 'Cormorant Garamond', Georgia, serif; overflow-x: hidden; }
+    #root { min-height: 100vh; }
+  </style>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useCallback } = React;
+
+    const PHILOSOPHERS = [
+      {
+        id: "heraclitus", name: "Heraclitus", dates: "c. 535–475 BCE",
+        concept: "Panta Rhei", subtitle: "Everything Flows",
+        math: "Lorenz Attractor",
+        equation: "dx/dt = σ(y−x),  dy/dt = x(ρ−z)−y,  dz/dt = xy−βz",
+        description: "\"No man ever steps in the same river twice.\" Heraclitus saw the universe as eternal flux — stability is illusion, change is the only constant. The Lorenz attractor captures this: a deterministic system that never repeats, tracing infinite novelty through finite space. The trajectory is always close to where it was, yet never exactly there again.",
+        color: "#ff6b35", accent: "#ffd166",
+      },
+      {
+        id: "plato", name: "Plato", dates: "c. 428–348 BCE",
+        concept: "Theory of Forms", subtitle: "Shadows on the Cave Wall",
+        math: "Dimensional Projection",
+        equation: "Shadow(t) = Proj₂ₐ( Rotate(Form₄ₐ, ωt) )",
+        description: "The prisoners in the cave see only shadows — 2D projections of a higher-dimensional reality they cannot access directly. A rotating 4D hypercube projected into 3D, then onto your 2D screen, enacts this allegory literally. The \"Form\" is the perfect geometric object; what you see is its degraded shadow.",
+        color: "#7b68ee", accent: "#b8a9ff",
+      },
+      {
+        id: "hegel", name: "Hegel", dates: "1770–1831",
+        concept: "The Dialectic", subtitle: "Thesis → Antithesis → Synthesis",
+        math: "Coupled Oscillators",
+        equation: "dT/dt = αT − βTA,   dA/dt = γA − δTA,   dS/dt = εTA − ζS",
+        description: "History moves through contradiction. A thesis generates its own antithesis; their collision produces a synthesis that transcends both. Modeled as a modified Lotka-Volterra system, thesis and antithesis oscillate in opposition while synthesis emerges from their interaction — then decays to become a new thesis.",
+        color: "#06d6a0", accent: "#b8f2e6",
+      },
+      {
+        id: "nietzsche", name: "Nietzsche", dates: "1844–1900",
+        concept: "Eternal Recurrence", subtitle: "The Greatest Weight",
+        math: "Toroidal Orbits",
+        equation: "x = (R+r·cos(qθ))cos(pθ),   y = (R+r·cos(qθ))sin(pθ)",
+        description: "\"What if a demon said: this life, you will have to live once more and innumerable times more?\" Eternal recurrence is the ultimate test of affirmation. On a torus, rational ratios produce closed orbits — perfect repetition. Irrational ratios fill the surface forever. Drag the ratio between order and chaos.",
+        color: "#ef476f", accent: "#ffc8dd",
+      },
+      {
+        id: "kocherlakota", name: "Kocherlakota", dates: "1963–",
+        concept: "Money Is Memory", subtitle: "The Equivalence Theorem (1998)",
+        math: "Agent Network · Information Substitution",
+        equation: "Alloc(M) ⊆ Alloc(Memory):  any monetary equilibrium ≅ an economy with perfect record-keeping",
+        description: "In a 1998 paper, Kocherlakota proved that money is equivalent to a perfect ledger of all past transactions. If every agent could recall every exchange by every other agent, currency would be redundant — trust and obligation suffice. Money exists because memory is costly and incomplete. It is, formally, a \"primitive form of memory.\" Drag the slider: as collective memory fades, watch golden tokens emerge to carry the information that minds cannot hold.",
+        color: "#f4a261", accent: "#ffe0b2",
+      },
+    ];
+
+    // ─── HERACLITUS ───
+    function HeraclitusCanvas({ width, height }) {
+      const canvasRef = useRef(null);
+      const stateRef = useRef({ x: 0.1, y: 0, z: 0, trail: [], maxTrail: 3000 });
+
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        let animId;
+        const s = stateRef.current;
+        const sigma = 10, rho = 28, beta = 8 / 3, dt = 0.005;
+
+        function draw() {
+          for (let i = 0; i < 8; i++) {
+            s.x += sigma * (s.y - s.x) * dt;
+            s.y += (s.x * (rho - s.z) - s.y) * dt;
+            s.z += (s.x * s.y - beta * s.z) * dt;
+            s.trail.push({ x: s.x, y: s.y, z: s.z });
+            if (s.trail.length > s.maxTrail) s.trail.shift();
+          }
+          ctx.fillStyle = "rgba(10,10,14,0.06)";
+          ctx.fillRect(0, 0, width, height);
+          const sc = 8;
+          for (let i = 1; i < s.trail.length; i++) {
+            const t = i / s.trail.length;
+            const p = s.trail[i], pp = s.trail[i - 1];
+            ctx.beginPath();
+            ctx.moveTo(width / 2 + pp.x * sc, height / 2 - (pp.z - 25) * sc);
+            ctx.lineTo(width / 2 + p.x * sc, height / 2 - (p.z - 25) * sc);
+            ctx.strokeStyle = `rgba(${Math.floor(255*(1-t)+255*t)},${Math.floor(107*(1-t)+209*t)},${Math.floor(53*(1-t)+102*t)},${t*0.8})`;
+            ctx.lineWidth = 0.5 + t * 2;
+            ctx.stroke();
+          }
+          const hx = width / 2 + s.x * sc, hy = height / 2 - (s.z - 25) * sc;
+          const g = ctx.createRadialGradient(hx, hy, 0, hx, hy, 15);
+          g.addColorStop(0, "rgba(255,209,102,0.9)"); g.addColorStop(1, "rgba(255,107,53,0)");
+          ctx.fillStyle = g; ctx.fillRect(hx - 15, hy - 15, 30, 30);
+          animId = requestAnimationFrame(draw);
+        }
+        ctx.fillStyle = "#0a0a0e"; ctx.fillRect(0, 0, width, height); draw();
+        return () => cancelAnimationFrame(animId);
+      }, [width, height]);
+
+      return <canvas ref={canvasRef} width={width} height={height} style={{ display: "block", borderRadius: 8 }} />;
+    }
+
+    // ─── PLATO ───
+    function PlatoCanvas({ width, height }) {
+      const canvasRef = useRef(null);
+      const angRef = useRef({ a: 0, b: 0, c: 0, d: 0 });
+
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        let animId;
+        const verts = [];
+        for (let i = 0; i < 16; i++) verts.push([(i&1)*2-1,((i>>1)&1)*2-1,((i>>2)&1)*2-1,((i>>3)&1)*2-1]);
+        const edges = [];
+        for (let i = 0; i < 16; i++) for (let j = i+1; j < 16; j++) {
+          let d = 0; for (let k = 0; k < 4; k++) if (verts[i][k] !== verts[j][k]) d++;
+          if (d === 1) edges.push([i, j]);
+        }
+
+        function rot(v, a, b, c, d) {
+          let [x, y, z, w] = v; let t;
+          t=x*Math.cos(a)-y*Math.sin(a); y=x*Math.sin(a)+y*Math.cos(a); x=t;
+          t=x*Math.cos(b)-z*Math.sin(b); z=x*Math.sin(b)+z*Math.cos(b); x=t;
+          t=x*Math.cos(c)-w*Math.sin(c); w=x*Math.sin(c)+w*Math.cos(c); x=t;
+          t=y*Math.cos(d)-z*Math.sin(d); z=y*Math.sin(d)+z*Math.cos(d); y=t;
+          return [x, y, z, w];
+        }
+
+        function draw() {
+          const a = angRef.current;
+          a.a += 0.008; a.b += 0.006; a.c += 0.004; a.d += 0.003;
+          ctx.fillStyle = "rgba(10,10,14,0.15)"; ctx.fillRect(0, 0, width, height);
+          const scale = width * 0.18;
+          const proj = verts.map(v => {
+            const r = rot(v, a.a, a.b, a.c, a.d);
+            const w1 = 1/(3-r[3]), w2 = 1/(4-r[2]*w1);
+            return [width/2+r[0]*w1*w2*scale, height/2+r[1]*w1*w2*scale, w2];
+          });
+          const sY = height * 0.82;
+          ctx.save(); ctx.globalAlpha = 0.15;
+          edges.forEach(([i,j]) => { ctx.beginPath(); ctx.moveTo(proj[i][0],sY); ctx.lineTo(proj[j][0],sY); ctx.strokeStyle="#7b68ee"; ctx.lineWidth=3; ctx.stroke(); });
+          ctx.restore();
+          ctx.save(); ctx.globalAlpha = 0.04;
+          for (let i=0;i<16;i+=3) { ctx.beginPath(); ctx.moveTo(proj[i][0],proj[i][1]); ctx.lineTo(proj[i][0],sY); ctx.strokeStyle="#b8a9ff"; ctx.lineWidth=1; ctx.stroke(); }
+          ctx.restore();
+          edges.forEach(([i,j]) => {
+            const dp = (proj[i][2]+proj[j][2])/2;
+            ctx.beginPath(); ctx.moveTo(proj[i][0],proj[i][1]); ctx.lineTo(proj[j][0],proj[j][1]);
+            ctx.strokeStyle=`rgba(123,104,238,${Math.min(1,Math.max(0.15,dp*0.8))})`; ctx.lineWidth=0.5+dp*2; ctx.stroke();
+          });
+          proj.forEach(p => {
+            const g = ctx.createRadialGradient(p[0],p[1],0,p[0],p[1],(1.5+p[2]*4)*2);
+            g.addColorStop(0,`rgba(184,169,255,${Math.min(1,p[2])})`); g.addColorStop(1,"rgba(123,104,238,0)");
+            ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p[0],p[1],(1.5+p[2]*4)*2,0,Math.PI*2); ctx.fill();
+          });
+          ctx.fillStyle="rgba(123,104,238,0.25)"; ctx.font="11px 'DM Mono',monospace"; ctx.textAlign="center";
+          ctx.fillText("— THE CAVE WALL —",width/2,sY+18);
+          animId = requestAnimationFrame(draw);
+        }
+        ctx.fillStyle="#0a0a0e"; ctx.fillRect(0,0,width,height); draw();
+        return () => cancelAnimationFrame(animId);
+      }, [width, height]);
+
+      return <canvas ref={canvasRef} width={width} height={height} style={{ display: "block", borderRadius: 8 }} />;
+    }
+
+    // ─── HEGEL ───
+    function HegelCanvas({ width, height }) {
+      const canvasRef = useRef(null);
+      const sRef = useRef({ T: 2, A: 0.5, S: 0.1, trail: [], maxTrail: 2500 });
+
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        let animId;
+        const s = sRef.current;
+        const dt = 0.02;
+
+        function draw() {
+          for (let i = 0; i < 4; i++) {
+            s.T = Math.max(0.01, s.T + (0.8*s.T - 0.5*s.T*s.A)*dt);
+            s.A = Math.max(0.01, s.A + (0.7*s.A - 0.4*s.T*s.A)*dt);
+            s.S = Math.max(0.01, s.S + (0.3*s.T*s.A - 0.15*s.S)*dt);
+            if (s.S > 3) { s.T += s.S*0.05; s.A += 0.3; s.S *= 0.5; }
+            s.T = Math.min(s.T,8); s.A = Math.min(s.A,8); s.S = Math.min(s.S,8);
+            s.trail.push({ T:s.T, A:s.A, S:s.S });
+            if (s.trail.length > s.maxTrail) s.trail.shift();
+          }
+          ctx.fillStyle = "rgba(10,10,14,0.04)"; ctx.fillRect(0,0,width,height);
+          const m=50, pw=width-m*2, ph=height-m*2;
+          for (let i=1; i<s.trail.length; i++) {
+            const t=i/s.trail.length, p=s.trail[i], pp=s.trail[i-1], sn=Math.min(1,p.S/5);
+            ctx.beginPath();
+            ctx.moveTo(m+(pp.T/8)*pw, m+(1-pp.A/8)*ph);
+            ctx.lineTo(m+(p.T/8)*pw, m+(1-p.A/8)*ph);
+            ctx.strokeStyle=`rgba(${Math.floor(6+178*sn)},${Math.floor(214-50*sn)},${Math.floor(160-100*sn)},${t*0.7})`;
+            ctx.lineWidth=0.5+t*2.5; ctx.stroke();
+          }
+          const cx=m+(s.T/8)*pw, cy=m+(1-s.A/8)*ph;
+          const g=ctx.createRadialGradient(cx,cy,0,cx,cy,20);
+          g.addColorStop(0,"rgba(184,242,230,0.9)"); g.addColorStop(1,"rgba(6,214,160,0)");
+          ctx.fillStyle=g; ctx.fillRect(cx-20,cy-20,40,40);
+          ctx.fillStyle="rgba(6,214,160,0.4)"; ctx.font="11px 'DM Mono',monospace";
+          ctx.textAlign="center"; ctx.fillText("THESIS →",width/2,height-15);
+          ctx.save(); ctx.translate(15,height/2); ctx.rotate(-Math.PI/2); ctx.fillText("ANTITHESIS →",0,0); ctx.restore();
+          ctx.fillStyle=`rgba(184,242,230,${0.3+(s.S/8)*0.7})`; ctx.font="bold 11px 'DM Mono',monospace";
+          ctx.textAlign="right"; ctx.fillText(`SYNTHESIS: ${s.S.toFixed(2)}`,width-m,30);
+          animId = requestAnimationFrame(draw);
+        }
+        ctx.fillStyle="#0a0a0e"; ctx.fillRect(0,0,width,height); draw();
+        return () => cancelAnimationFrame(animId);
+      }, [width, height]);
+
+      return <canvas ref={canvasRef} width={width} height={height} style={{ display: "block", borderRadius: 8 }} />;
+    }
+
+    // ─── NIETZSCHE ───
+    function NietzscheCanvas({ width, height, ratio }) {
+      const canvasRef = useRef(null);
+
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        let animId, theta=0, trail=[];
+        const R=Math.min(width,height)*0.28, r=R*0.38;
+
+        function draw() {
+          ctx.fillStyle="rgba(10,10,14,0.03)"; ctx.fillRect(0,0,width,height);
+          for (let i=0;i<6;i++) {
+            theta+=0.025;
+            const x3=(R+r*Math.cos(theta))*Math.cos(ratio*theta);
+            const y3=(R+r*Math.cos(theta))*Math.sin(ratio*theta);
+            const z3=r*Math.sin(theta);
+            const tilt=0.5;
+            trail.push({x:width/2+x3, y:height/2+y3*Math.cos(tilt)-z3*Math.sin(tilt), z:y3*Math.sin(tilt)+z3*Math.cos(tilt)});
+            if (trail.length>4000) trail.shift();
+          }
+          for (let i=1;i<trail.length;i++) {
+            const t=i/trail.length, p0=trail[i-1], p1=trail[i];
+            const df=0.4+0.6*((p1.z+r)/(2*r));
+            ctx.beginPath(); ctx.moveTo(p0.x,p0.y); ctx.lineTo(p1.x,p1.y);
+            ctx.strokeStyle=`rgba(${Math.floor(239*df)},${Math.floor(71*df+130*(1-df))},${Math.floor(111*df+200*(1-df))},${t*0.65*df})`;
+            ctx.lineWidth=(0.3+t*2)*df; ctx.stroke();
+          }
+          if (trail.length>0) {
+            const h=trail[trail.length-1];
+            const g=ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,12);
+            g.addColorStop(0,"rgba(255,200,221,0.95)"); g.addColorStop(1,"rgba(239,71,111,0)");
+            ctx.fillStyle=g; ctx.beginPath(); ctx.arc(h.x,h.y,12,0,Math.PI*2); ctx.fill();
+          }
+          animId=requestAnimationFrame(draw);
+        }
+        ctx.fillStyle="#0a0a0e"; ctx.fillRect(0,0,width,height); draw();
+        return () => cancelAnimationFrame(animId);
+      }, [width, height, ratio]);
+
+      return <canvas ref={canvasRef} width={width} height={height} style={{ display: "block", borderRadius: 8 }} />;
+    }
+
+    // ─── KOCHERLAKOTA ───
+    function KocherlakotaCanvas({ width, height, memoryLevel }) {
+      const canvasRef = useRef(null);
+      const simRef = useRef(null);
+      const memRef = useRef(memoryLevel);
+      memRef.current = memoryLevel;
+
+      useEffect(() => {
+        const NUM=16, cx=width/2, cy=height/2, rad=Math.min(width,height)*0.33;
+        const agents=[];
+        for (let i=0;i<NUM;i++) {
+          const ring=i<10?0:1, count=ring===0?10:6, idx=ring===0?i:i-10;
+          const angle=(idx/count)*Math.PI*2-Math.PI/2+ring*0.3;
+          const r=ring===0?rad:rad*0.52;
+          agents.push({x:cx+Math.cos(angle)*r+(Math.random()-0.5)*15, y:cy+Math.sin(angle)*r+(Math.random()-0.5)*15, id:i});
+        }
+        const pairs=[];
+        for (let i=0;i<NUM;i++) for (let j=i+1;j<NUM;j++) {
+          const dx=agents[i].x-agents[j].x, dy=agents[i].y-agents[j].y;
+          if (Math.sqrt(dx*dx+dy*dy)<rad*1.1) pairs.push([i,j]);
+        }
+        simRef.current={agents, pairs, particles:[], memoryEdges:[], pulses:[], time:0};
+      }, [width, height]);
+
+      useEffect(() => {
+        const canvas=canvasRef.current;
+        const ctx=canvas.getContext("2d");
+        let animId;
+        const sim=simRef.current;
+        if (!sim) return;
+
+        function tick() {
+          sim.time++;
+          const mem=memRef.current;
+          if (sim.time%18===0 && sim.pairs.length>0) {
+            const [i,j]=sim.pairs[Math.floor(Math.random()*sim.pairs.length)];
+            if (Math.random()>mem) {
+              sim.particles.push({ax:sim.agents[i].x,ay:sim.agents[i].y,bx:sim.agents[j].x,by:sim.agents[j].y,t:0,speed:0.012+Math.random()*0.008,size:2.5+Math.random()*2.5});
+            } else {
+              let edge=sim.memoryEdges.find(e=>(e.a===i&&e.b===j)||(e.a===j&&e.b===i));
+              if (edge) { edge.strength=Math.min(1,edge.strength+0.3); edge.age=0; }
+              else sim.memoryEdges.push({a:i,b:j,strength:0.45,age:0});
+              const mx=(sim.agents[i].x+sim.agents[j].x)/2, my=(sim.agents[i].y+sim.agents[j].y)/2;
+              sim.pulses.push({x:mx,y:my,t:0});
+            }
+          }
+          sim.particles=sim.particles.filter(p=>{p.t+=p.speed;return p.t<1;});
+          const decay=0.001*(1.3-mem);
+          sim.memoryEdges.forEach(e=>{e.age++;e.strength-=decay;});
+          sim.memoryEdges=sim.memoryEdges.filter(e=>e.strength>0.02);
+          sim.pulses=sim.pulses.filter(p=>{p.t+=0.02;return p.t<1;});
+        }
+
+        function draw() {
+          tick();
+          const mem=memRef.current;
+          ctx.fillStyle="rgba(10,10,14,0.14)"; ctx.fillRect(0,0,width,height);
+
+          for (const e of sim.memoryEdges) {
+            const a=sim.agents[e.a], b=sim.agents[e.b];
+            const alpha=e.strength*mem*0.7;
+            if (alpha<0.01) continue;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+            const g=ctx.createLinearGradient(a.x,a.y,b.x,b.y);
+            g.addColorStop(0,`rgba(244,162,97,${alpha*0.6})`);
+            g.addColorStop(0.5,`rgba(255,224,178,${alpha})`);
+            g.addColorStop(1,`rgba(244,162,97,${alpha*0.6})`);
+            ctx.strokeStyle=g; ctx.lineWidth=1+e.strength*3.5; ctx.stroke();
+            if (mem>0.2) {
+              const numDots=Math.ceil(e.strength*3);
+              for (let d=0;d<numDots;d++) {
+                const ft=((sim.time*0.015+e.a*0.4+d*0.33)%1);
+                ctx.fillStyle=`rgba(255,236,210,${alpha*0.6})`;
+                ctx.beginPath(); ctx.arc(a.x+(b.x-a.x)*ft,a.y+(b.y-a.y)*ft,1.2,0,Math.PI*2); ctx.fill();
+              }
+            }
+          }
+
+          for (const p of sim.pulses) {
+            const r=p.t*40, alpha=(1-p.t)*0.35*mem;
+            const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r);
+            g.addColorStop(0,`rgba(255,224,178,${alpha})`); g.addColorStop(1,"rgba(244,162,97,0)");
+            ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,r,0,Math.PI*2); ctx.fill();
+          }
+
+          for (const p of sim.particles) {
+            const x=p.ax+(p.bx-p.ax)*p.t;
+            const y=p.ay+(p.by-p.ay)*p.t-Math.sin(p.t*Math.PI)*35;
+            const ma=0.4+0.6*(1-mem);
+            const g=ctx.createRadialGradient(x,y,0,x,y,p.size*4);
+            g.addColorStop(0,`rgba(255,215,0,${ma*0.5})`); g.addColorStop(0.4,`rgba(244,162,97,${ma*0.3})`); g.addColorStop(1,"rgba(244,162,97,0)");
+            ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,p.size*4,0,Math.PI*2); ctx.fill();
+            ctx.fillStyle=`rgba(255,230,130,${ma})`; ctx.beginPath(); ctx.arc(x,y,p.size,0,Math.PI*2); ctx.fill();
+            ctx.strokeStyle=`rgba(200,160,60,${ma})`; ctx.lineWidth=0.8; ctx.beginPath(); ctx.arc(x,y,p.size,0,Math.PI*2); ctx.stroke();
+          }
+
+          for (let i=0;i<sim.agents.length;i++) {
+            const a=sim.agents[i];
+            let mc=0;
+            for (const e of sim.memoryEdges) if (e.a===i||e.b===i) mc+=e.strength;
+            const baseR=5.5, r=baseR+mc*1.8*mem;
+            const gg=ctx.createRadialGradient(a.x,a.y,0,a.x,a.y,r*3.5);
+            const mi=Math.min(1,mc*mem*0.35);
+            gg.addColorStop(0,`rgba(244,162,97,${0.1+mi*0.25})`); gg.addColorStop(1,"rgba(244,162,97,0)");
+            ctx.fillStyle=gg; ctx.beginPath(); ctx.arc(a.x,a.y,r*3.5,0,Math.PI*2); ctx.fill();
+            const bg=ctx.createRadialGradient(a.x-r*0.25,a.y-r*0.25,0,a.x,a.y,r);
+            bg.addColorStop(0,"rgba(255,240,220,0.9)"); bg.addColorStop(1,"rgba(244,162,97,0.65)");
+            ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(a.x,a.y,r,0,Math.PI*2); ctx.fill();
+            ctx.strokeStyle=`rgba(255,224,178,${0.15+mem*0.5})`; ctx.lineWidth=1.2;
+            ctx.beginPath(); ctx.arc(a.x,a.y,r+4,-Math.PI/2,-Math.PI/2+Math.PI*2*mem); ctx.stroke();
+          }
+
+          ctx.font="11px 'DM Mono',monospace"; ctx.textAlign="left";
+          ctx.fillStyle=`rgba(255,215,0,${0.25+(1-mem)*0.5})`; ctx.fillText(`MONEY IN FLIGHT: ${sim.particles.length}`,20,25);
+          ctx.fillStyle=`rgba(255,224,178,${0.25+mem*0.5})`; ctx.fillText(`MEMORY BONDS: ${sim.memoryEdges.length}`,20,42);
+          ctx.textAlign="center"; ctx.font="10px 'DM Mono',monospace";
+          if (mem>0.85) { ctx.fillStyle="rgba(255,224,178,0.45)"; ctx.fillText("PERFECT MEMORY — money is redundant, trust suffices",width/2,height-15); }
+          else if (mem<0.15) { ctx.fillStyle="rgba(255,215,0,0.45)"; ctx.fillText("NO MEMORY — money carries all transactional information",width/2,height-15); }
+          else { ctx.fillStyle="rgba(244,162,97,0.35)"; ctx.fillText("PARTIAL MEMORY — money supplements where recall fails",width/2,height-15); }
+
+          animId=requestAnimationFrame(draw);
+        }
+        ctx.fillStyle="#0a0a0e"; ctx.fillRect(0,0,width,height); draw();
+        return () => cancelAnimationFrame(animId);
+      }, [width, height]);
+
+      return <canvas ref={canvasRef} width={width} height={height} style={{ display: "block", borderRadius: 8 }} />;
+    }
+
+    // ═══════════════ MAIN ═══════════════
+    function App() {
+      const [active, setActive] = useState(0);
+      const [nietzscheRatio, setNietzscheRatio] = useState(1.618);
+      const [memoryLevel, setMemoryLevel] = useState(0.5);
+      const containerRef = useRef(null);
+      const [dims, setDims] = useState({ w: 600, h: 420 });
+
+      useEffect(() => {
+        function measure() {
+          if (containerRef.current) {
+            const r = containerRef.current.getBoundingClientRect();
+            setDims({ w: Math.floor(r.width), h: Math.floor(Math.min(r.width * 0.7, 450)) });
+          }
+        }
+        measure();
+        window.addEventListener("resize", measure);
+        return () => window.removeEventListener("resize", measure);
+      }, []);
+
+      const phil = PHILOSOPHERS[active];
+
+      const renderCanvas = useCallback(() => {
+        switch (active) {
+          case 0: return <HeraclitusCanvas width={dims.w} height={dims.h} />;
+          case 1: return <PlatoCanvas width={dims.w} height={dims.h} />;
+          case 2: return <HegelCanvas width={dims.w} height={dims.h} />;
+          case 3: return <NietzscheCanvas width={dims.w} height={dims.h} ratio={nietzscheRatio} />;
+          case 4: return <KocherlakotaCanvas width={dims.w} height={dims.h} memoryLevel={memoryLevel} />;
+          default: return null;
+        }
+      }, [active, dims, nietzscheRatio, memoryLevel]);
+
+      return (
+        <div style={{ minHeight: "100vh", background: "#0a0a0e", color: "#e8e6e1", fontFamily: "'Cormorant Garamond','Georgia',serif", padding: 0, overflow: "hidden" }}>
+          <div style={{ padding: "28px 32px 20px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+            <div style={{ fontFamily: "'DM Mono',monospace", fontSize: 10, letterSpacing: 4, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", marginBottom: 8 }}>
+              Ideas → Mathematics
+            </div>
+            <h1 style={{ fontSize: "clamp(22px,4vw,34px)", fontWeight: 300, margin: 0, letterSpacing: -0.5, lineHeight: 1.2 }}>
+              Ideas Made <span style={{ fontStyle: "italic", color: phil.color }}>Visible</span>
+            </h1>
+          </div>
+
+          <div style={{ display: "flex", gap: 0, borderBottom: "1px solid rgba(255,255,255,0.06)", overflowX: "auto" }}>
+            {PHILOSOPHERS.map((p, i) => (
+              <button key={p.id} onClick={() => setActive(i)} style={{
+                flex: 1, minWidth: 90, padding: "14px 10px",
+                background: i === active ? "rgba(255,255,255,0.04)" : "transparent",
+                border: "none", borderBottom: i === active ? `2px solid ${p.color}` : "2px solid transparent",
+                color: i === active ? p.color : "rgba(255,255,255,0.35)",
+                fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(12px,1.8vw,14px)",
+                fontWeight: i === active ? 600 : 400, cursor: "pointer",
+                transition: "all 0.3s ease", letterSpacing: 0.5, whiteSpace: "nowrap",
+              }}>{p.name}</button>
+            ))}
+          </div>
+
+          <div style={{ padding: "24px 32px" }}>
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ fontFamily: "'DM Mono',monospace", fontSize: 10, letterSpacing: 3, color: phil.accent, textTransform: "uppercase", marginBottom: 6, opacity: 0.7 }}>
+                {phil.math}
+              </div>
+              <h2 style={{ fontSize: "clamp(20px,3.5vw,28px)", fontWeight: 300, margin: "0 0 4px", fontStyle: "italic" }}>
+                {phil.concept}
+              </h2>
+              <div style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", fontFamily: "'DM Mono',monospace" }}>
+                {phil.name} · {phil.dates} · "{phil.subtitle}"
+              </div>
+            </div>
+
+            <div ref={containerRef} style={{ borderRadius: 8, overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", marginBottom: 20 }}>
+              {renderCanvas()}
+            </div>
+
+            {active === 3 && (
+              <div style={{ marginBottom: 20, padding: "16px 20px", background: "rgba(239,71,111,0.06)", borderRadius: 8, border: "1px solid rgba(239,71,111,0.15)" }}>
+                <div style={{ fontFamily: "'DM Mono',monospace", fontSize: 11, color: "rgba(255,255,255,0.5)", marginBottom: 10 }}>
+                  FREQUENCY RATIO: <span style={{ color: "#ef476f", fontWeight: "bold" }}>{nietzscheRatio.toFixed(3)}</span>
+                  {" "}· {Math.abs(nietzscheRatio - Math.round(nietzscheRatio)) < 0.01 ? "CLOSED ORBIT — perfect recurrence" : "IRRATIONAL — eternal wandering"}
+                </div>
+                <input type="range" min="0.5" max="4" step="0.001" value={nietzscheRatio}
+                  onChange={e => setNietzscheRatio(parseFloat(e.target.value))}
+                  style={{ width: "100%", accentColor: "#ef476f", cursor: "pointer" }} />
+                <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "'DM Mono',monospace", fontSize: 10, color: "rgba(255,255,255,0.25)", marginTop: 6 }}>
+                  <span>0.5</span>
+                  <span onClick={() => setNietzscheRatio(1.0)} style={{ cursor: "pointer", color: "rgba(239,71,111,0.5)" }}>1:1 ○</span>
+                  <span onClick={() => setNietzscheRatio(1.618)} style={{ cursor: "pointer", color: "rgba(239,71,111,0.5)" }}>φ</span>
+                  <span onClick={() => setNietzscheRatio(2.0)} style={{ cursor: "pointer", color: "rgba(239,71,111,0.5)" }}>2:1 ○</span>
+                  <span onClick={() => setNietzscheRatio(Math.PI)} style={{ cursor: "pointer", color: "rgba(239,71,111,0.5)" }}>π</span>
+                  <span>4.0</span>
+                </div>
+              </div>
+            )}
+
+            {active === 4 && (
+              <div style={{ marginBottom: 20, padding: "16px 20px", background: "rgba(244,162,97,0.06)", borderRadius: 8, border: "1px solid rgba(244,162,97,0.15)" }}>
+                <div style={{ fontFamily: "'DM Mono',monospace", fontSize: 11, color: "rgba(255,255,255,0.5)", marginBottom: 10 }}>
+                  COLLECTIVE MEMORY: <span style={{ color: "#f4a261", fontWeight: "bold" }}>{(memoryLevel * 100).toFixed(0)}%</span>
+                  {" "}· {memoryLevel > 0.85
+                    ? "near-perfect recall — money is unnecessary"
+                    : memoryLevel < 0.15
+                      ? "almost no recall — money carries everything"
+                      : "partial recall — money fills the gaps in trust"}
+                </div>
+                <input type="range" min="0" max="1" step="0.01" value={memoryLevel}
+                  onChange={e => setMemoryLevel(parseFloat(e.target.value))}
+                  style={{ width: "100%", accentColor: "#f4a261", cursor: "pointer" }} />
+                <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "'DM Mono',monospace", fontSize: 10, color: "rgba(255,255,255,0.25)", marginTop: 6 }}>
+                  <span onClick={() => setMemoryLevel(0)} style={{ cursor: "pointer", color: "rgba(244,162,97,0.5)" }}>NO MEMORY</span>
+                  <span onClick={() => setMemoryLevel(0.5)} style={{ cursor: "pointer", color: "rgba(244,162,97,0.5)" }}>HUMAN REALITY</span>
+                  <span onClick={() => setMemoryLevel(1)} style={{ cursor: "pointer", color: "rgba(244,162,97,0.5)" }}>PERFECT MEMORY</span>
+                </div>
+              </div>
+            )}
+
+            <div style={{
+              padding: "14px 20px", background: "rgba(255,255,255,0.02)", borderRadius: 8,
+              border: "1px solid rgba(255,255,255,0.06)", marginBottom: 20,
+              fontFamily: "'DM Mono',monospace", fontSize: 12, color: phil.accent,
+              letterSpacing: 0.5, overflowX: "auto", whiteSpace: "nowrap",
+            }}>
+              {phil.equation}
+            </div>
+
+            <p style={{ fontSize: 15, lineHeight: 1.75, color: "rgba(255,255,255,0.6)", maxWidth: 640, fontWeight: 300 }}>
+              {phil.description}
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
