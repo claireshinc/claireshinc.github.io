@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ideas Made Visible — Philosophy as Mathematics</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0a0a0e; color: #e8e6e1; font-family: 'Cormorant Garamond', Georgia, serif; overflow-x: hidden; }
@@ -428,7 +428,7 @@
       }, [active, dims, nietzscheRatio, memoryLevel]);
 
       return (
-        <div style={{ minHeight: "100vh", background: "#0a0a0e", color: "#e8e6e1", fontFamily: "'Cormorant Garamond','Georgia',serif", padding: 0, overflow: "hidden" }}>
+        <div style={{ minHeight: "100vh", background: "#0a0a0e", color: "#e8e6e1", fontFamily: "'DM Sans',system-ui,sans-serif", padding: 0, overflow: "hidden" }}>
           <div style={{ padding: "28px 32px 20px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
             <div style={{ fontFamily: "'DM Mono',monospace", fontSize: 10, letterSpacing: 4, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", marginBottom: 8 }}>
               Ideas → Mathematics
@@ -445,7 +445,7 @@
                 background: i === active ? "rgba(255,255,255,0.04)" : "transparent",
                 border: "none", borderBottom: i === active ? `2px solid ${p.color}` : "2px solid transparent",
                 color: i === active ? p.color : "rgba(255,255,255,0.35)",
-                fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(12px,1.8vw,14px)",
+                fontFamily: "'DM Sans',system-ui,sans-serif", fontSize: "clamp(12px,1.8vw,14px)",
                 fontWeight: i === active ? 600 : 400, cursor: "pointer",
                 transition: "all 0.3s ease", letterSpacing: 0.5, whiteSpace: "nowrap",
               }}>{p.name}</button>

@@ -2,7 +2,7 @@
 layout: post
 title:  "Market Making 101"
 date:   2025-12-31
-categories: jekyll update
+topic: finance
 ---
 
 Every time you buy a stock, someone sells it to you. Every time you sell, someone buys. Have you ever considered that odd? That there is always a person on the other side of your trade willing to buy 100 shares of Samsung on a random Tuesday? The chances that another human happened to want exactly 100 shares of Samsung at exactly 2PM at exactly your price are effectively zero. So who's on the other side? .... Some entity that "makes" the market. These market makers' entire business model is being available at that exact moment, ready to take the opposite side of your trade. The infrastructure that makes trading feel effortless is itself a very sophisticated business! 

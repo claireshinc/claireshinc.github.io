@@ -1,15 +1,15 @@
 ---
 layout: post
 title:  "Prime Brokerage and Why It Matters"
-date:   2025-11-19 
-categories: jekyll update
+date:   2025-11-19
+topic: finance
 ---
 
 Every business needs an infrastructure provider, and trading is no different. For hedge funds, trading firms, market makers, and asset managers, it is too expensive to operate directly on exchanges where the products trade on. Thus in this case, infrastructure providers would be entities that enable such participation in markets without the membership at an exchange; Prime Brokers (PBs) do exactly this. They lend stocks, provide leverage, clear trades, hold collateral, and connect clients to exchanges.
 
 ![Prime Brokerage Diagram](/assets/img/primebrokerdiagram.png)
 
-To further drive home the importance of such entities, let's come up with scenarios that would happen without them. 
+Following scenarios are three of many that can happen without PBs. 
 
 Scenario 1. Shorting would not be a thing because one cannot borrow stocks without PBs. PBs are the only entities that create a centralized stock borrow and loan market by aggregating their book. It is impossible to borrow directly from retail brokers or the exchange. If you are a long only tech fund, you can't hedge beta by shorting the Nasdaq. An ETF market maker would not be able to hedge its ETF constituents. Implementing strategies like pairs trading or market arb would also be impossible because they all rely on the ability to short the relative value loser. Expressing the opposite view from longs would be impossible thus prices would become stickier as well. 
 

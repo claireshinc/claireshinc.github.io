@@ -32,7 +32,7 @@ theme: minima
 plugins:
   - jekyll-feed
 header_pages:
-  - projects.md
+  - projects/index.html
 
 # Exclude from processing.
 # The following items will not be processed, by default.

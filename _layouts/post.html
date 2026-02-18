@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title }} — Claire Shin</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'Craftwork Grotesk';
+      src: url('https://font.download/cdn/webfont/craftwork-grotesk/CraftworkGrotesk-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0e;
+      --text: #e8e6e1;
+      --text-mid: rgba(255,255,255,0.4);
+      --text-dim: rgba(255,255,255,0.25);
+      --card-bg: rgba(255,255,255,0.02);
+      --card-border: rgba(255,255,255,0.06);
+      --shadow-hover: rgba(0,0,0,0.4);
+      --link-color: #7b68ee;
+      --code-bg: rgba(255,255,255,0.06);
+    }
+    :root.light {
+      --bg: #eef2f7;
+      --text: #4a4a4e;
+      --text-mid: rgba(0,0,0,0.45);
+      --text-dim: rgba(0,0,0,0.3);
+      --card-bg: rgba(0,0,0,0.03);
+      --card-border: rgba(0,0,0,0.08);
+      --shadow-hover: rgba(0,0,0,0.1);
+      --link-color: #5b4bc7;
+      --code-bg: rgba(0,0,0,0.05);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.4s ease;
+    }
+    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav a {
+      color: var(--text-mid);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav a:hover { color: var(--text); }
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--text-mid);
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .theme-toggle:hover {
+      color: var(--text);
+      border-color: var(--text-mid);
+      background: var(--card-bg);
+    }
+    .theme-toggle .icon { font-size: 13px; }
+
+    /* ── ARTICLE ── */
+    .article {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 32px 80px;
+    }
+    .article-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .article h1 {
+      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+
+    /* ── PROSE ── */
+    .prose {
+      font-size: 17px;
+      line-height: 1.85;
+      font-weight: 300;
+    }
+    .prose p { margin-bottom: 24px; }
+    .prose h2 {
+      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin: 48px 0 20px;
+    }
+    .prose h3 {
+      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin: 36px 0 16px;
+    }
+    .prose a {
+      color: var(--link-color);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .prose a:hover { border-bottom-color: var(--link-color); }
+    .prose strong { font-weight: 600; }
+    .prose em { color: var(--text-mid); }
+    .prose ul, .prose ol {
+      margin: 0 0 24px 24px;
+    }
+    .prose li { margin-bottom: 8px; }
+    .prose blockquote {
+      border-left: 2px solid var(--card-border);
+      padding-left: 20px;
+      margin: 24px 0;
+      color: var(--text-mid);
+      font-style: italic;
+    }
+    .prose code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .prose pre {
+      background: var(--code-bg);
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 24px 0;
+      border: 1px solid var(--card-border);
+    }
+    .prose pre code {
+      background: none;
+      padding: 0;
+    }
+    .prose img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+    .prose hr {
+      border: none;
+      height: 1px;
+      background: var(--card-border);
+      margin: 40px 0;
+    }
+
+    /* ── BACK LINK ── */
+    .back {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 32px 60px;
+    }
+    .back a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .back a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .article, .back { padding-left: 20px; padding-right: 20px; }
+      .nav { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/">← Home</a>
+    <div class="nav-links">
+      <a href="/projects/">Projects</a>
+      <a href="/about/">About</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+        <span class="icon" id="theme-icon">☀</span>
+        <span id="theme-label">Light</span>
+      </button>
+    </div>
+  </nav>
+
+  <article class="article">
+    <div class="article-date">{{ page.date | date: "%B %d, %Y" }}</div>
+    <h1>{{ page.title }}</h1>
+    <div class="prose">
+      {{ content }}
+    </div>
+  </article>
+
+  <div class="back">
+    <a href="/">← All posts</a>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-icon');
+    const label = document.getElementById('theme-label');
+    const root = document.documentElement;
+    function setTheme(mode) {
+      if (mode === 'light') { root.classList.add('light'); icon.textContent = '☾'; label.textContent = 'Dark'; }
+      else { root.classList.remove('light'); icon.textContent = '☀'; label.textContent = 'Light'; }
+      localStorage.setItem('theme', mode);
+    }
+    toggle.addEventListener('click', () => setTheme(root.classList.contains('light') ? 'dark' : 'light'));
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+</body>
+</html>
