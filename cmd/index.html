@@ -353,6 +353,20 @@ function getLastWeekByMaterial(matId) {
   return (mat.logs || []).filter(l => getWeekKey(l.date) === key).reduce((s,l) => s + l.count, 0);
 }
 
+function getAllTimeProblems() {
+  let total = 0;
+  DATA.materials.forEach(m => {
+    (m.logs || []).forEach(l => { total += l.count; });
+  });
+  return total;
+}
+
+function getAllTimeByMaterial(matId) {
+  const mat = DATA.materials.find(m => m.id === matId);
+  if (!mat) return 0;
+  return (mat.logs || []).reduce((s,l) => s + l.count, 0);
+}
+
 // ============================================================
 // KIRBY SVG
 // ============================================================
@@ -398,17 +412,17 @@ function kirbyHTML(size, happy) {
 }
 
 function getKirbySize() {
-  const problems = getThisWeekProblems();
-  // 0 problems = 60px, 50+ = 160px
-  return 60 + Math.min(100, problems * 2);
+  const problems = getAllTimeProblems();
+  // 0 problems = 60px, 500+ = 160px
+  return 60 + Math.min(100, problems * 0.2);
 }
 
 function getKirbyMessage() {
-  const p = getThisWeekProblems();
+  const p = getAllTimeProblems();
   if (p === 0) return "feed me problems... i'm <em>smol</em>";
-  if (p < 10) return `${p} problems this week. i'm growing! <em>keep going~</em>`;
-  if (p < 25) return `${p} problems! i'm getting <em>chonky</em> 🎀`;
-  if (p < 50) return `${p} problems!! i'm <em>MEGA KIRBY</em> now ✨`;
+  if (p < 50) return `${p} problems total. i'm growing! <em>keep going~</em>`;
+  if (p < 150) return `${p} problems! i'm getting <em>chonky</em> 🎀`;
+  if (p < 300) return `${p} problems!! i'm <em>MEGA KIRBY</em> now ✨`;
   return `${p} problems!!! i've reached <em>FINAL FORM</em> 💫`;
 }
 
@@ -444,14 +458,13 @@ function renderOverview() {
   const el = document.getElementById('p-overview');
   const apps = DATA.applications.length;
   const contacts = DATA.contacts.length;
+  const allTime = getAllTimeProblems();
   const thisWeek = getThisWeekProblems();
-  const lastWeek = getLastWeekProblems();
   const inProgress = DATA.papers.filter(p => p.status === 'Reading' || p.status === 'In Progress').length;
   const pipeline = DATA.applications.filter(a => ['OA/Screen','Interview','Final Round'].includes(a.status)).length;
   const contactFollowUps = DATA.contacts.filter(c => c.followUp).length;
 
-  const delta = thisWeek - lastWeek;
-  const deltaStr = delta > 0 ? `<span class="s-up">↑ ${delta} vs last week</span>` : delta < 0 ? `<span class="s-down">↓ ${Math.abs(delta)} vs last week</span>` : `<span class="s-flat">— same as last week</span>`;
+  const deltaStr = thisWeek > 0 ? `<span class="s-up">+${thisWeek} this week</span>` : `<span class="s-flat">0 this week</span>`;
 
   // Action items
   let actions = [];
@@ -470,7 +483,7 @@ function renderOverview() {
 
   el.innerHTML = `
     <div class="kirby-zone">
-      ${kirbyHTML(getKirbySize(), thisWeek > 5)}
+      ${kirbyHTML(getKirbySize(), allTime > 5)}
       <div class="kirby-msg">${getKirbyMessage()}</div>
     </div>
 
@@ -487,7 +500,7 @@ function renderOverview() {
       </div>
       <div class="card stat" style="border-left-color:var(--mint)">
         <div class="s-label">PROBLEMS SOLVED</div>
-        <div class="s-val" style="color:var(--mint)">${thisWeek}</div>
+        <div class="s-val" style="color:var(--mint)">${allTime}</div>
         <div class="s-delta">${deltaStr}</div>
       </div>
       <div class="card stat" style="border-left-color:var(--coral)">
@@ -511,18 +524,18 @@ function renderOverview() {
       <button class="btn" onclick="openAddAction()" style="font-size:9px;padding:6px 12px">+ ACTION ITEM</button>
     </div>
 
-    <div class="section">LAST WEEK BREAKDOWN</div>
+    <div class="section">PROGRESS BREAKDOWN</div>
     <div class="grid4">
       ${DATA.materials.map(m => {
-        const lw = getLastWeekByMaterial(m.id);
+        const at = getAllTimeByMaterial(m.id);
         const tw = getThisWeekByMaterial(m.id);
         return `<div class="card" style="padding:12px 14px">
           <div style="font-size:10px;color:var(--tx3);letter-spacing:1px;margin-bottom:4px">${m.icon} ${m.name}</div>
           <div style="display:flex;align-items:baseline;gap:8px">
-            <span style="font-family:var(--sans);font-size:18px;font-weight:700;color:var(--mint)">${tw}</span>
-            <span style="font-size:10px;color:var(--tx3)">this wk</span>
+            <span style="font-family:var(--sans);font-size:18px;font-weight:700;color:var(--mint)">${at}</span>
+            <span style="font-size:10px;color:var(--tx3)">total</span>
           </div>
-          <div style="font-size:10px;color:var(--tx3);margin-top:2px">${lw} last wk</div>
+          <div style="font-size:10px;color:var(--tx3);margin-top:2px">+${tw} this wk</div>
         </div>`;
       }).join('')}
     </div>
@@ -804,11 +817,11 @@ function renderLearn() {
     const total = (m.logs || []).reduce((s, l) => s + l.count, 0);
     return `
       <div class="card mat-card" onclick="openLogModal('${m.id}')">
-        <div class="mat-count">${tw}</div>
+        <div class="mat-count">${total}</div>
         <div class="mat-logo">${m.icon || '📖'}</div>
         <div class="mat-name">${esc(m.name)}</div>
         <div class="mat-type">${esc(m.type || '')}</div>
-        <div style="margin-top:8px;font-size:10px;color:var(--tx3)">${total} total problems</div>
+        <div style="margin-top:8px;font-size:10px;color:var(--tx3)">+${tw} this week</div>
       </div>
     `;
   }).join('');
