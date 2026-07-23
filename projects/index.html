@@ -9,46 +9,47 @@ layout: null
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — Claire Shin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #17150f;
-      --text: #ece5d3;
-      --text-mid: rgba(236,229,211,0.52);
-      --text-dim: rgba(236,229,211,0.32);
-      --card-bg: rgba(236,229,211,0.025);
-      --card-border: rgba(236,229,211,0.1);
-      --card-desc: rgba(236,229,211,0.55);
-      --tech-border: rgba(236,229,211,0.18);
-      --tech-text: rgba(236,229,211,0.5);
-      --shadow-hover: rgba(0,0,0,0.3);
-      --sigil-opacity: 0.35;
-      --sigil-hover-opacity: 0.55;
+      --bg: #0A1428;
+      --heading: #B7CBE8;
+      --text: #E8ECF2;
+      --text-mid: rgba(232,236,242,0.62);
+      --text-dim: rgba(232,236,242,0.4);
+      --card-bg: rgba(232,236,242,0.03);
+      --card-border: rgba(232,236,242,0.16);
+      --card-desc: rgba(232,236,242,0.6);
+      --tech-border: rgba(232,236,242,0.22);
+      --tech-text: rgba(232,236,242,0.58);
+      --hover: #8ECDF0;
+      --sigil-opacity: 0.4;
+      --sigil-hover-opacity: 0.6;
     }
     :root.light {
-      --bg: #f3ede0;
-      --text: #33301f;
-      --text-mid: rgba(51,48,31,0.55);
-      --text-dim: rgba(51,48,31,0.38);
-      --card-bg: rgba(51,48,31,0.025);
-      --card-border: rgba(51,48,31,0.12);
-      --card-desc: rgba(51,48,31,0.6);
-      --tech-border: rgba(51,48,31,0.22);
-      --tech-text: rgba(51,48,31,0.55);
-      --shadow-hover: rgba(51,48,31,0.1);
-      --sigil-opacity: 0.2;
-      --sigil-hover-opacity: 0.35;
+      --bg: #eef2f7;
+      --heading: #00205B;
+      --text: #0A1E3F;
+      --text-mid: #5B6770;
+      --text-dim: rgba(10,30,63,0.42);
+      --card-bg: #F4F6F8;
+      --card-border: #D9DDE3;
+      --card-desc: #33404F;
+      --tech-border: #C7CDD6;
+      --tech-text: #4A5560;
+      --hover: #3E9FD8;
+      --sigil-opacity: 0.24;
+      --sigil-hover-opacity: 0.4;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Work Sans', system-ui, sans-serif;
+      font-family: "Helvetica Neue", Helvetica, Arial, -apple-system, sans-serif;
       overflow-x: hidden;
       min-height: 100vh;
-      transition: background 0.4s ease, color 0.4s ease;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* ── NAV ── */
@@ -58,30 +59,39 @@ layout: null
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      transition: border-color 0.4s ease;
+      transition: border-color 0.3s ease;
     }
-    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
     .nav a {
       color: var(--text-mid);
       text-decoration: none;
-      font-size: 14px;
-      transition: color 0.3s;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
     }
     .nav a:hover { color: var(--text); }
 
     .theme-toggle {
       background: none;
-      border: none;
+      border: 1px solid var(--card-border);
+      border-radius: 0;
       cursor: pointer;
-      font-family: 'Work Sans', sans-serif;
-      font-size: 13px;
-      color: var(--text-dim);
-      transition: color 0.3s;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      padding: 6px 10px;
+      transition: color 0.2s, border-color 0.2s;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
-    .theme-toggle:hover { color: var(--text); }
+    .theme-toggle:hover { color: var(--text); border-color: var(--text-mid); }
 
     /* ── HEADER ── */
     .header {
@@ -90,24 +100,28 @@ layout: null
       margin: 0 auto;
     }
     .header-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: var(--text-dim);
       margin-bottom: 10px;
     }
     .header h1 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(28px, 5vw, 42px);
-      font-weight: 400;
-      font-style: italic;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
       line-height: 1.2;
+      color: var(--heading);
       margin-bottom: 12px;
     }
     .header p {
       font-size: 16px;
       line-height: 1.7;
       color: var(--text-mid);
-      font-weight: 300;
+      font-weight: 400;
       max-width: 520px;
     }
 
@@ -119,9 +133,7 @@ layout: null
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-auto-rows: minmax(260px, auto);
-      gap: 1px;
-      background: var(--card-border);
-      border: 1px solid var(--card-border);
+      gap: 20px;
     }
 
     /* ── CARD ── */
@@ -135,24 +147,23 @@ layout: null
       flex-direction: column;
       justify-content: flex-end;
       padding: 28px;
-      background: var(--bg);
-      border-left: 2px solid transparent;
-      transition: border-color 0.35s ease, background 0.4s ease;
+      background: transparent;
+      border: 1px solid var(--card-border);
+      transition: border-color 0.25s ease;
       opacity: 0;
-      transform: translateY(18px);
+      transform: translateY(16px);
     }
     .card.visible {
       opacity: 1;
       transform: translateY(0);
-      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.25s ease;
     }
     .card.hero {
       grid-column: span 2;
       min-height: 320px;
     }
     .card:hover {
-      border-left-color: var(--accent, #c1893f);
-      background: var(--card-bg);
+      border-color: var(--hover);
     }
 
     /* canvas sigil */
@@ -163,7 +174,7 @@ layout: null
       pointer-events: none;
       z-index: 0;
       opacity: var(--sigil-opacity);
-      transition: opacity 0.4s ease;
+      transition: opacity 0.3s ease;
     }
     .card:hover canvas { opacity: var(--sigil-hover-opacity); }
 
@@ -173,25 +184,29 @@ layout: null
       z-index: 2;
     }
     .card-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       margin-bottom: 10px;
-      opacity: 0.75;
     }
     .card-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 400;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(20px, 2.5vw, 27px);
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--heading);
       margin-bottom: 8px;
       line-height: 1.25;
-      transition: color 0.3s ease;
+      transition: color 0.2s ease;
     }
-    .card:hover .card-title { color: var(--accent, #c1893f); }
+    .card:hover .card-title { color: var(--hover); }
     .card-desc {
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.65;
       color: var(--card-desc);
-      font-weight: 300;
+      font-weight: 400;
       max-width: 480px;
     }
     .card-tech {
@@ -201,8 +216,9 @@ layout: null
       margin-top: 16px;
     }
     .card-tech span {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11.5px;
+      font-weight: 500;
       padding: 3px 8px;
       border: 1px solid var(--tech-border);
       color: var(--tech-text);
@@ -214,10 +230,10 @@ layout: null
       z-index: 2;
       font-size: 16px;
       color: var(--text-dim);
-      transition: color 0.3s, transform 0.3s ease;
+      transition: color 0.2s, transform 0.25s ease;
     }
     .card:hover .card-arrow {
-      color: var(--accent, #c1893f);
+      color: var(--hover);
       transform: translate(2px, -2px);
     }
 
@@ -231,43 +247,46 @@ layout: null
       display: block;
       position: relative;
       padding: 32px;
-      background: var(--card-bg);
+      background: transparent;
       border: 1px solid var(--card-border);
-      border-left: 2px solid transparent;
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.3s ease, background 0.4s ease;
+      transition: border-color 0.25s ease;
       overflow: hidden;
       opacity: 0;
-      transform: translateY(18px);
+      transform: translateY(16px);
     }
     .philosophy-link a.visible {
       opacity: 1;
       transform: translateY(0);
-      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.25s ease;
     }
     .philosophy-link a:hover {
-      border-left-color: #c1893f;
+      border-color: var(--hover);
     }
     .philosophy-link .pl-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--text-dim);
       margin-bottom: 8px;
     }
     .philosophy-link .pl-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(20px, 2.5vw, 26px);
-      font-weight: 400;
-      font-style: italic;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(20px, 2.5vw, 25px);
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--heading);
       margin-bottom: 6px;
-      transition: color 0.3s;
+      transition: color 0.2s;
     }
-    .philosophy-link a:hover .pl-title { color: #c1893f; }
+    .philosophy-link a:hover .pl-title { color: var(--hover); }
     .philosophy-link .pl-desc {
-      font-size: 15px;
+      font-size: 14.5px;
       color: var(--text-mid);
-      font-weight: 300;
+      font-weight: 400;
     }
 
     /* ── PARTICLE BG ── */
@@ -291,7 +310,7 @@ layout: null
 <body>
   <canvas id="particle-bg"></canvas>
   <nav class="nav">
-    <a href="/">← Home</a>
+    <a href="/">Home</a>
     <div class="nav-links">
       <a href="/about/">About</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
@@ -313,12 +332,12 @@ layout: null
     <a class="card hero"
        href="https://volsurface-dislocation.streamlit.app/"
        target="_blank" rel="noopener"
-       style="--accent: #c1893f;"
+       data-accent="volsurface"
        data-delay="0">
       <canvas data-sigil="volsurface"></canvas>
       <span class="card-arrow">&#8599;</span>
       <div class="card-content">
-        <div class="card-tag" style="color: #c1893f;">Options & Derivatives</div>
+        <div class="card-tag" style="color: #0057B8;">Options & Derivatives</div>
         <div class="card-title">Volatility Archaeologist</div>
         <div class="card-desc">
           SVI surface fitting, feature extraction, and anomaly detection for options markets. Finds mispricings by comparing current surface geometry to historical distributions — then generates trade ideas.
@@ -337,12 +356,12 @@ layout: null
     <a class="card"
        href="https://sector-momentum.streamlit.app/"
        target="_blank" rel="noopener"
-       style="--accent: #a8503a;"
+       data-accent="momentum"
        data-delay="80">
       <canvas data-sigil="momentum"></canvas>
       <span class="card-arrow">&#8599;</span>
       <div class="card-content">
-        <div class="card-tag" style="color: #a8503a;">Systematic Equities</div>
+        <div class="card-tag" style="color: #b5522f;">Systematic Equities</div>
         <div class="card-title">Sector Momentum</div>
         <div class="card-desc">
           Crash-aware long/short sector momentum with sentiment gating. Runs three crash controllers as counterfactuals against the same baseline.
@@ -358,12 +377,12 @@ layout: null
     <!-- Thesis OS -->
     <a class="card"
        href="/projects/thesis-os/"
-       style="--accent: #4f7a5c;"
+       data-accent="thesis"
        data-delay="160">
       <canvas data-sigil="thesis"></canvas>
       <span class="card-arrow">&#8599;</span>
       <div class="card-content">
-        <div class="card-tag" style="color: #4f7a5c;">Fundamental Equity PM</div>
+        <div class="card-tag" style="color: #2f7a52;">Fundamental Equity PM</div>
         <div class="card-title">Thesis OS</div>
         <div class="card-desc">
           Structured briefs and investment theses compiled into testable claims with kill criteria. Decision artifacts for fundamental equity PMs.
@@ -458,8 +477,8 @@ layout: null
     // Vol surface: a stylized volatility smile mesh
     function drawVolSurface(ctx, w, h) {
       const rows = 12, cols = 24;
-      ctx.strokeStyle = isLight() ? 'rgba(193,137,63,0.2)' : 'rgba(193,137,63,0.14)';
-      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = isLight() ? 'rgba(0,87,184,0.3)' : 'rgba(91,155,224,0.22)';
+      ctx.lineWidth = 1;
       for (let r = 0; r < rows; r++) {
         ctx.beginPath();
         const yBase = h * 0.25 + (r / rows) * h * 0.55;
@@ -476,7 +495,7 @@ layout: null
       // vertical wisps
       for (let c = 0; c < cols; c += 3) {
         ctx.beginPath();
-        ctx.strokeStyle = isLight() ? 'rgba(193,137,63,0.09)' : 'rgba(224,185,130,0.05)';
+        ctx.strokeStyle = isLight() ? 'rgba(0,87,184,0.14)' : 'rgba(150,190,230,0.09)';
         for (let r = 0; r < rows; r++) {
           const x = (c / cols) * w;
           const yBase = h * 0.25 + (r / rows) * h * 0.55;
@@ -495,10 +514,10 @@ layout: null
       const waves = 5;
       for (let i = 0; i < waves; i++) {
         ctx.beginPath();
-        const base = isLight() ? 0.1 : 0.06;
-        const alpha = base + i * 0.02;
-        ctx.strokeStyle = `rgba(168,80,58,${alpha})`;
-        ctx.lineWidth = 1 + i * 0.3;
+        const base = isLight() ? 0.15 : 0.1;
+        const alpha = base + i * 0.025;
+        ctx.strokeStyle = `rgba(181,82,47,${alpha})`;
+        ctx.lineWidth = 1.2 + i * 0.3;
         const freq = 2 + i * 0.7;
         const amp = h * (0.08 + i * 0.04);
         const phase = i * 1.2;
@@ -528,9 +547,9 @@ layout: null
           ctx.beginPath();
           ctx.moveTo(x, y);
           ctx.lineTo(nx, ny);
-          const tBase = isLight() ? 0.16 : 0.09;
-          ctx.strokeStyle = `rgba(79,122,92,${tBase - depth * 0.012})`;
-          ctx.lineWidth = 2 - depth * 0.35;
+          const tBase = isLight() ? 0.24 : 0.15;
+          ctx.strokeStyle = `rgba(47,122,82,${tBase - depth * 0.012})`;
+          ctx.lineWidth = 2.2 - depth * 0.35;
           ctx.stroke();
           addBranch(nx, ny, depth + 1, a);
         }
@@ -538,11 +557,11 @@ layout: null
       addBranch(w * 0.15, h * 0.5, 0, -0.3);
       addBranch(w * 0.75, h * 0.35, 0, 0.5);
       nodes.forEach(n => {
-        const r = 2.5 - n.depth * 0.4;
+        const r = 2.8 - n.depth * 0.4;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, Math.max(r, 0.8), 0, Math.PI * 2);
-        const nBase = isLight() ? 0.22 : 0.13;
-        ctx.fillStyle = `rgba(79,122,92,${nBase - n.depth * 0.02})`;
+        ctx.arc(n.x, n.y, Math.max(r, 1), 0, Math.PI * 2);
+        const nBase = isLight() ? 0.32 : 0.2;
+        ctx.fillStyle = `rgba(47,122,82,${nBase - n.depth * 0.02})`;
         ctx.fill();
       });
     }
@@ -566,7 +585,7 @@ layout: null
       const canvas = document.getElementById('particle-bg');
       const ctx = canvas.getContext('2d');
       let w, h, dpr;
-      const NUM = 1200;
+      const NUM = 1600;
       const points = [];
       let angle = 0;
 
@@ -621,12 +640,12 @@ layout: null
         projected.sort((a, b) => a.z - b.z);
 
         for (const p of projected) {
-          const alpha = 0.06 + p.depth * 0.3;
-          const sz = 0.6 + p.depth * 1.6;
+          const alpha = 0.1 + p.depth * 0.36;
+          const sz = 1.0 + p.depth * 2.0;
           if (light) {
-            ctx.fillStyle = `rgba(147,96,31,${alpha * 0.45})`;
+            ctx.fillStyle = `rgba(100,155,215,${alpha * 0.65})`;
           } else {
-            ctx.fillStyle = `rgba(193,137,63,${alpha})`;
+            ctx.fillStyle = `rgba(150,190,235,${alpha})`;
           }
           ctx.beginPath();
           ctx.arc(p.sx, p.sy, sz, 0, Math.PI * 2);

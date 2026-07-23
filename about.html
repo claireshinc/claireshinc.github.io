@@ -9,34 +9,35 @@ layout: null
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Claire Shin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #17150f;
-      --text: #ece5d3;
-      --text-mid: rgba(236,229,211,0.52);
-      --text-dim: rgba(236,229,211,0.32);
-      --card-border: rgba(236,229,211,0.1);
-      --link-color: #c1893f;
+      --bg: #0A1428;
+      --heading: #B7CBE8;
+      --text: #E8ECF2;
+      --text-mid: rgba(232,236,242,0.62);
+      --text-dim: rgba(232,236,242,0.4);
+      --card-border: rgba(232,236,242,0.16);
+      --link-color: #8ECDF0;
     }
     :root.light {
-      --bg: #f3ede0;
-      --text: #33301f;
-      --text-mid: rgba(51,48,31,0.55);
-      --text-dim: rgba(51,48,31,0.38);
-      --card-border: rgba(51,48,31,0.12);
-      --link-color: #93601f;
+      --bg: #eef2f7;
+      --heading: #00205B;
+      --text: #0A1E3F;
+      --text-mid: #5B6770;
+      --text-dim: rgba(10,30,63,0.42);
+      --card-border: #D9DDE3;
+      --link-color: #3E9FD8;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Work Sans', system-ui, sans-serif;
+      font-family: "Helvetica Neue", Helvetica, Arial, -apple-system, sans-serif;
       overflow-x: hidden;
       min-height: 100vh;
-      transition: background 0.4s ease, color 0.4s ease;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* ── NAV ── */
@@ -46,29 +47,38 @@ layout: null
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      transition: border-color 0.4s ease;
+      transition: border-color 0.3s ease;
     }
-    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
     .nav a {
       color: var(--text-mid);
       text-decoration: none;
-      font-size: 14px;
-      transition: color 0.3s;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
     }
     .nav a:hover { color: var(--link-color); }
     .theme-toggle {
       background: none;
-      border: none;
+      border: 1px solid var(--card-border);
+      border-radius: 0;
       cursor: pointer;
-      font-family: 'Work Sans', sans-serif;
-      font-size: 13px;
-      color: var(--text-dim);
-      transition: color 0.3s;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      padding: 6px 10px;
+      transition: color 0.2s, border-color 0.2s;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
-    .theme-toggle:hover { color: var(--link-color); }
+    .theme-toggle:hover { color: var(--link-color); border-color: var(--link-color); }
 
     /* ── CONTENT ── */
     .content {
@@ -77,67 +87,72 @@ layout: null
       padding: 60px 32px 80px;
     }
     .content-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-bottom: 10px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--link-color);
+      margin-bottom: 12px;
     }
     .content h1 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(30px, 5vw, 44px);
-      font-weight: 400;
-      font-style: italic;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(30px, 5vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
       line-height: 1.2;
+      color: var(--heading);
       margin-bottom: 40px;
     }
-    .bio {
-      font-size: 17px;
-      line-height: 1.85;
-      font-weight: 300;
-      color: var(--text);
+    .content-box {
+      border: 1px solid var(--card-border);
+      background: transparent;
+      padding: 36px;
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
-    .bio.visible {
+    .content-box.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .bio p { margin-bottom: 24px; }
+    .bio {
+      font-size: 16.5px;
+      line-height: 1.8;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .bio p { margin-bottom: 22px; }
     .bio p:last-child { margin-bottom: 0; }
     .bio strong {
-      font-weight: 600;
-      color: var(--text);
+      font-weight: 700;
+      color: var(--heading);
     }
     .bio em {
       color: var(--text-mid);
-      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
     }
 
     .divider {
       width: 32px;
-      height: 1px;
-      background: var(--card-border);
-      margin: 36px 0;
-      transition: background 0.4s ease;
+      height: 2px;
+      background: var(--link-color);
+      margin: 34px 0;
     }
 
     .contact {
-      font-size: 14px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       color: var(--text-dim);
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
-    }
-    .contact.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
     .contact a {
       color: var(--link-color);
       text-decoration: none;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
+      transition: border-color 0.2s;
     }
     .contact a:hover { border-bottom-color: var(--link-color); }
 
@@ -161,7 +176,7 @@ layout: null
 <body>
   <canvas id="particle-bg"></canvas>
   <nav class="nav">
-    <a href="/">← Home</a>
+    <a href="/">Home</a>
     <div class="nav-links">
       <a href="/projects/">Projects</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
@@ -175,18 +190,20 @@ layout: null
     <div class="content-label">About</div>
     <h1>Claire Shin</h1>
 
-    <div class="bio" id="bio">
-      <p>Hi, my name is Claire! I'm currently working in Mirae Asset's market making division, where I implement hedging strategies for an ETF market making system.</p>
+    <div class="content-box" id="content-box">
+      <div class="bio">
+        <p>Hi, my name is Claire! I'm currently working in Mirae Asset's market making division, where I implement hedging strategies for an ETF market making system.</p>
 
-      <p>Prior to doing quant work, I did research in anomaly detection and medical imaging at Harvard and Seoul National University, building models for distribution shift detections, ultrasound tumor classification, and statistical evaluation for spatial computing. I also briefly worked on procedural generation systems and synthetic data tools for robotic perception, working with Blender, Python, and geometry/shader nodes for Infinigen at Princeton.</p>
+        <p>Prior to doing quant work, I did research in anomaly detection and medical imaging at Harvard and Seoul National University, building models for distribution shift detections, ultrasound tumor classification, and statistical evaluation for spatial computing. I also briefly worked on procedural generation systems and synthetic data tools for robotic perception, working with Blender, Python, and geometry/shader nodes for Infinigen at Princeton.</p>
 
-      <p><em>This notebook is where I track my interests over time.</em></p>
-    </div>
+        <p><em>This notebook is where I track my interests over time.</em></p>
+      </div>
 
-    <div class="divider"></div>
+      <div class="divider"></div>
 
-    <div class="contact" id="contact">
-      <a href="https://github.com/claireshinc">GitHub</a> · <a href="mailto:js9523@princeton.edu">Email</a>
+      <div class="contact">
+        <a href="https://github.com/claireshinc">GitHub</a> · <a href="mailto:js9523@princeton.edu">Email</a>
+      </div>
     </div>
   </div>
 
@@ -214,15 +231,15 @@ layout: null
         }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.bio, .contact').forEach(el => observer.observe(el));
+    document.querySelectorAll('.content-box').forEach(el => observer.observe(el));
 
     // ═══════════════ PARTICLE CONSTELLATION ═══════════════
     (function() {
       const canvas = document.getElementById('particle-bg');
       const ctx = canvas.getContext('2d');
       let w, h, dpr;
-      const NUM = 60;
-      const CONNECT_DIST = 150;
+      const NUM = 80;
+      const CONNECT_DIST = 160;
       const particles = [];
 
       function resize() {
@@ -242,7 +259,7 @@ layout: null
           y: Math.random() * 2000,
           vx: (Math.random() - 0.5) * 0.3,
           vy: (Math.random() - 0.5) * 0.3,
-          r: 1 + Math.random() * 1.5
+          r: 1.4 + Math.random() * 1.8
         });
       }
 
@@ -267,14 +284,14 @@ layout: null
             const dy = particles[i].y - particles[j].y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < CONNECT_DIST) {
-              const alpha = (1 - dist / CONNECT_DIST) * 0.12;
+              const alpha = (1 - dist / CONNECT_DIST) * 0.22;
               ctx.beginPath();
               ctx.moveTo(particles[i].x, particles[i].y);
               ctx.lineTo(particles[j].x, particles[j].y);
               ctx.strokeStyle = light
-                ? `rgba(147,96,31,${alpha * 0.6})`
-                : `rgba(193,137,63,${alpha})`;
-              ctx.lineWidth = 0.5;
+                ? `rgba(0,87,184,${alpha * 0.75})`
+                : `rgba(91,155,224,${alpha})`;
+              ctx.lineWidth = 0.7;
               ctx.stroke();
             }
           }
@@ -285,8 +302,8 @@ layout: null
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
           ctx.fillStyle = light
-            ? 'rgba(147,96,31,0.18)'
-            : 'rgba(193,137,63,0.25)';
+            ? 'rgba(0,87,184,0.32)'
+            : 'rgba(91,155,224,0.45)';
           ctx.fill();
         }
 

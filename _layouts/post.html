@@ -4,36 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ page.title }} — Claire Shin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #17150f;
-      --text: #ece5d3;
-      --text-mid: rgba(236,229,211,0.52);
-      --text-dim: rgba(236,229,211,0.32);
-      --card-border: rgba(236,229,211,0.1);
-      --link-color: #c1893f;
-      --code-bg: rgba(236,229,211,0.06);
+      --bg: #0A1428;
+      --heading: #B7CBE8;
+      --text: #E8ECF2;
+      --text-mid: rgba(232,236,242,0.62);
+      --text-dim: rgba(232,236,242,0.4);
+      --card-border: rgba(232,236,242,0.16);
+      --link-color: #8ECDF0;
+      --code-bg: rgba(232,236,242,0.07);
     }
     :root.light {
-      --bg: #f3ede0;
-      --text: #33301f;
-      --text-mid: rgba(51,48,31,0.55);
-      --text-dim: rgba(51,48,31,0.38);
-      --card-border: rgba(51,48,31,0.12);
-      --link-color: #93601f;
-      --code-bg: rgba(51,48,31,0.06);
+      --bg: #eef2f7;
+      --heading: #00205B;
+      --text: #0A1E3F;
+      --text-mid: #5B6770;
+      --text-dim: rgba(10,30,63,0.42);
+      --card-border: #D9DDE3;
+      --link-color: #3E9FD8;
+      --code-bg: #F4F6F8;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Work Sans', system-ui, sans-serif;
+      font-family: "Helvetica Neue", Helvetica, Arial, -apple-system, sans-serif;
       overflow-x: hidden;
       min-height: 100vh;
-      transition: background 0.4s ease, color 0.4s ease;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* ── NAV ── */
@@ -43,93 +44,136 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      transition: border-color 0.4s ease;
+      transition: border-color 0.3s ease;
     }
-    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
     .nav a {
       color: var(--text-mid);
       text-decoration: none;
-      font-size: 14px;
-      transition: color 0.3s;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
     }
     .nav a:hover { color: var(--link-color); }
     .theme-toggle {
       background: none;
-      border: none;
+      border: 1px solid var(--card-border);
+      border-radius: 0;
       cursor: pointer;
-      font-family: 'Work Sans', sans-serif;
-      font-size: 13px;
-      color: var(--text-dim);
-      transition: color 0.3s;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      padding: 6px 10px;
+      transition: color 0.2s, border-color 0.2s;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
-    .theme-toggle:hover { color: var(--link-color); }
+    .theme-toggle:hover { color: var(--link-color); border-color: var(--link-color); }
+    .hl-toggle {
+      background: none;
+      border: 1px solid var(--card-border);
+      border-radius: 0;
+      cursor: pointer;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      padding: 6px 10px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .hl-toggle:hover { color: var(--link-color); border-color: var(--link-color); }
+    .hl-toggle.on {
+      background: var(--link-color);
+      border-color: var(--link-color);
+      color: var(--bg);
+    }
 
     /* ── ARTICLE ── */
     .article {
-      max-width: 660px;
+      max-width: 820px;
       margin: 0 auto;
       padding: 60px 32px 80px;
     }
     .article-date {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 13px;
       color: var(--text-dim);
       margin-bottom: 12px;
     }
     .article h1 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(28px, 5vw, 40px);
-      font-weight: 400;
-      font-style: italic;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(28px, 5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
       line-height: 1.2;
+      color: var(--heading);
       margin-bottom: 40px;
     }
 
-    /* ── PROSE ── */
-    .prose {
-      font-size: 17px;
-      line-height: 1.85;
-      font-weight: 300;
+    .content-box {
+      border: 1px solid var(--card-border);
+      background: transparent;
+      padding: 36px;
     }
-    .prose p { margin-bottom: 24px; }
-    .prose h2 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 24px;
+
+    /* ── PROSE ── */
+    .prose, .prose * {
+      font-family: "Helvetica Neue", Helvetica, Arial, -apple-system, sans-serif;
+    }
+    .prose {
+      font-size: 16.5px;
+      line-height: 1.8;
       font-weight: 400;
-      margin: 48px 0 20px;
+    }
+    .prose p { margin-bottom: 22px; }
+    .prose h2 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--heading);
+      margin: 46px 0 18px;
     }
     .prose h3 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 20px;
-      font-weight: 400;
-      margin: 36px 0 16px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--heading);
+      margin: 34px 0 14px;
     }
     .prose a {
       color: var(--link-color);
       text-decoration: none;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
+      transition: border-color 0.2s;
     }
     .prose a:hover { border-bottom-color: var(--link-color); }
-    .prose strong { font-weight: 600; }
+    .prose strong { font-weight: 700; }
     .prose em { color: var(--text-mid); }
     .prose ul, .prose ol {
-      margin: 0 0 24px 24px;
+      margin: 0 0 22px 24px;
     }
     .prose li { margin-bottom: 8px; }
     .prose blockquote {
-      border-left: 2px solid var(--card-border);
+      border-left: 3px solid var(--link-color);
       padding-left: 20px;
       margin: 24px 0;
       color: var(--text-mid);
       font-style: italic;
     }
     .prose code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 13.5px;
       background: var(--code-bg);
       padding: 2px 6px;
     }
@@ -154,18 +198,29 @@
       background: var(--card-border);
       margin: 40px 0;
     }
+    .prose mark.uhl {
+      background: rgba(255,214,51,0.85);
+      color: #1a1a1a;
+      padding: 0 1px;
+      cursor: pointer;
+    }
+    body.hl-mode .prose { cursor: text; }
 
     /* ── BACK LINK ── */
     .back {
-      max-width: 660px;
+      max-width: 820px;
       margin: 0 auto;
       padding: 0 32px 60px;
     }
     .back a {
-      font-size: 14px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--text-dim);
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.2s;
     }
     .back a:hover { color: var(--link-color); }
 
@@ -178,10 +233,11 @@
 </head>
 <body>
   <nav class="nav">
-    <a href="/">← Home</a>
+    <a href="/">Home</a>
     <div class="nav-links">
       <a href="/projects/">Projects</a>
       <a href="/about/">About</a>
+      <button class="hl-toggle" id="hl-toggle" aria-pressed="false" title="Select text to highlight it">Highlight</button>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
         <span class="icon" id="theme-icon">☀</span>
         <span id="theme-label">Light</span>
@@ -192,8 +248,10 @@
   <article class="article">
     <div class="article-date">{{ page.date | date: "%B %d, %Y" }}</div>
     <h1>{{ page.title }}</h1>
-    <div class="prose">
-      {{ content }}
+    <div class="content-box">
+      <div class="prose">
+        {{ content }}
+      </div>
     </div>
   </article>
 
@@ -214,6 +272,66 @@
     toggle.addEventListener('click', () => setTheme(root.classList.contains('light') ? 'dark' : 'light'));
     const saved = localStorage.getItem('theme');
     if (saved) setTheme(saved);
+
+    // ═══════════════ HIGHLIGHTER ═══════════════
+    (function() {
+      const hlBtn = document.getElementById('hl-toggle');
+      const prose = document.querySelector('.prose');
+      const storeKey = 'highlights:' + location.pathname;
+      let hlMode = false;
+
+      function setHlMode(on) {
+        hlMode = on;
+        document.body.classList.toggle('hl-mode', on);
+        hlBtn.classList.toggle('on', on);
+        hlBtn.setAttribute('aria-pressed', String(on));
+        hlBtn.textContent = on ? 'Highlighting' : 'Highlight';
+      }
+      hlBtn.addEventListener('click', () => setHlMode(!hlMode));
+
+      function saveHighlights() {
+        try { sessionStorage.setItem(storeKey, prose.innerHTML); } catch (e) {}
+      }
+
+      function wrapSelection() {
+        const sel = window.getSelection();
+        if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+        const range = sel.getRangeAt(0);
+        if (!prose.contains(range.commonAncestorContainer)) return;
+        if (range.toString().trim() === '') return;
+        const mark = document.createElement('mark');
+        mark.className = 'uhl';
+        try {
+          range.surroundContents(mark);
+        } catch (e) {
+          const frag = range.extractContents();
+          mark.appendChild(frag);
+          range.insertNode(mark);
+        }
+        sel.removeAllRanges();
+        saveHighlights();
+      }
+
+      prose.addEventListener('mouseup', () => {
+        if (!hlMode) return;
+        setTimeout(wrapSelection, 0);
+      });
+
+      prose.addEventListener('click', (e) => {
+        const mark = e.target.closest('mark.uhl');
+        if (!mark) return;
+        const parent = mark.parentNode;
+        while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+        parent.removeChild(mark);
+        parent.normalize();
+        saveHighlights();
+      });
+
+      try {
+        const savedHl = sessionStorage.getItem(storeKey);
+        if (savedHl) prose.innerHTML = savedHl;
+      } catch (e) {}
+    })();
   </script>
 </body>
 </html>

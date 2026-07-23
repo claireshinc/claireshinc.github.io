@@ -7,42 +7,39 @@ layout: null
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Claire Shin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #17150f;
-      --text: #ece5d3;
-      --text-mid: rgba(236,229,211,0.52);
-      --text-dim: rgba(236,229,211,0.32);
-      --card-bg: rgba(236,229,211,0.03);
-      --card-border: rgba(236,229,211,0.1);
-      --card-desc: rgba(236,229,211,0.55);
-      --shadow-hover: rgba(0,0,0,0.35);
-      --accent: #c1893f;
-      --accent-dim: rgba(193,137,63,0.35);
+      --bg: #0A1428;
+      --heading: #B7CBE8;
+      --text: #E8ECF2;
+      --text-mid: rgba(232,236,242,0.62);
+      --text-dim: rgba(232,236,242,0.4);
+      --card-border: rgba(232,236,242,0.16);
+      --card-desc: rgba(232,236,242,0.6);
+      --accent: #8ECDF0;
+      --accent-dim: rgba(142,205,240,0.5);
     }
     :root.light {
-      --bg: #f3ede0;
-      --text: #33301f;
-      --text-mid: rgba(51,48,31,0.55);
-      --text-dim: rgba(51,48,31,0.38);
-      --card-bg: rgba(51,48,31,0.03);
-      --card-border: rgba(51,48,31,0.12);
-      --card-desc: rgba(51,48,31,0.6);
-      --shadow-hover: rgba(51,48,31,0.1);
-      --accent: #93601f;
-      --accent-dim: rgba(147,96,31,0.3);
+      --bg: #eef2f7;
+      --heading: #00205B;
+      --text: #0A1E3F;
+      --text-mid: #5B6770;
+      --text-dim: rgba(10,30,63,0.42);
+      --card-border: #D9DDE3;
+      --card-desc: #33404F;
+      --accent: #3E9FD8;
+      --accent-dim: rgba(62,159,216,0.4);
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Work Sans', system-ui, sans-serif;
+      font-family: "Helvetica Neue", Helvetica, Arial, -apple-system, sans-serif;
       overflow-x: hidden;
       min-height: 100vh;
-      transition: background 0.4s ease, color 0.4s ease;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* ── NAV ── */
@@ -52,48 +49,56 @@ layout: null
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      transition: border-color 0.4s ease;
+      transition: border-color 0.3s ease;
     }
     .nav-left a {
-      color: var(--text);
+      color: var(--heading);
       text-decoration: none;
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 19px;
-      font-style: italic;
-      font-weight: 500;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.1px;
     }
-    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
     .nav-links a {
       color: var(--text-mid);
       text-decoration: none;
-      font-size: 14px;
-      transition: color 0.3s;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--accent); }
     .theme-toggle {
       background: none;
-      border: none;
+      border: 1px solid var(--card-border);
+      border-radius: 0;
       cursor: pointer;
-      font-family: 'Work Sans', sans-serif;
-      font-size: 13px;
-      color: var(--text-dim);
-      transition: color 0.3s;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      padding: 6px 10px;
+      transition: color 0.2s, border-color 0.2s;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
-    .theme-toggle:hover { color: var(--accent); }
+    .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
 
     /* ── HEADER ── */
     .header {
-      padding: 56px 32px 40px;
+      padding: 56px 32px 36px;
       max-width: 860px;
       margin: 0 auto;
     }
     .header p {
-      font-family: 'Fraunces', Georgia, serif;
-      font-style: italic;
-      font-size: 22px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
       color: var(--text-mid);
       font-weight: 400;
     }
@@ -107,84 +112,67 @@ layout: null
     .posts-header {
       display: flex;
       align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
+      margin-bottom: 4px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--card-border);
     }
     .posts-label {
-      font-size: 13px;
-      letter-spacing: 0.5px;
-      color: var(--text-dim);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
     }
-    .topic-filters {
+    .post-list {
       display: flex;
-      gap: 18px;
-    }
-    .topic-btn {
-      font-family: 'Work Sans', sans-serif;
-      font-size: 13px;
-      padding: 0 0 4px;
-      border: none;
-      border-bottom: 1px solid transparent;
-      background: none;
-      color: var(--text-dim);
-      cursor: pointer;
-      transition: color 0.3s, border-color 0.3s;
-    }
-    .topic-btn:hover { color: var(--text); }
-    .topic-btn.active {
-      color: var(--text);
-      border-bottom-color: var(--accent);
-    }
-    .topic-btn[data-filter="finance"].active { border-bottom-color: #4f7a5c; }
-    .topic-btn[data-filter="ml"].active { border-bottom-color: #a8503a; }
-    .post-item.hidden {
-      display: none;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 20px;
     }
     .post-item {
       display: block;
       text-decoration: none;
       color: inherit;
-      padding: 24px 4px;
-      border-bottom: 1px solid var(--card-border);
-      transition: border-color 0.3s ease, padding-left 0.3s ease;
+      padding: 24px 28px;
+      background: transparent;
+      border: 1px solid var(--card-border);
+      transition: border-color 0.25s ease;
       opacity: 0;
-      transform: translateY(14px);
+      transform: translateY(12px);
     }
     .post-item.visible {
       opacity: 1;
       transform: translateY(0);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .post-item:hover {
-      padding-left: 14px;
-      border-bottom-color: var(--accent-dim);
+      border-color: var(--accent);
     }
-    .post-item[data-topic="finance"]:hover { border-bottom-color: rgba(79,122,92,0.5); }
-    .post-item[data-topic="ml"]:hover { border-bottom-color: rgba(168,80,58,0.5); }
     .post-date {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 13px;
       color: var(--text-dim);
       margin-bottom: 8px;
     }
     .post-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(20px, 2.4vw, 25px);
-      font-weight: 400;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(19px, 2.2vw, 23px);
+      font-weight: 700;
+      letter-spacing: -0.2px;
       line-height: 1.3;
+      color: var(--heading);
       margin-bottom: 8px;
-      transition: color 0.3s;
+      transition: color 0.2s;
     }
     .post-item:hover .post-title { color: var(--accent); }
-    .post-item[data-topic="finance"]:hover .post-title { color: #4f7a5c; }
-    .post-item[data-topic="ml"]:hover .post-title { color: #a8503a; }
     .post-excerpt {
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.7;
       color: var(--card-desc);
-      font-weight: 300;
+      font-weight: 400;
     }
 
     /* ── PARTICLE BG ── */
@@ -225,19 +213,16 @@ layout: null
   <div class="posts">
     <div class="posts-header">
       <div class="posts-label">Writing</div>
-      <div class="topic-filters">
-        <button class="topic-btn active" data-filter="all">All</button>
-        <button class="topic-btn" data-filter="finance">Finance</button>
-        <button class="topic-btn" data-filter="ml">ML</button>
-      </div>
     </div>
-    {% for post in site.posts %}
-    <a class="post-item" href="{{ post.url }}" data-delay="{{ forloop.index0 | times: 80 }}" data-topic="{{ post.topic }}">
-      <div class="post-date">{{ post.date | date: "%B %d, %Y" }}</div>
-      <div class="post-title">{{ post.title }}</div>
-      <div class="post-excerpt">{{ post.content | strip_html | truncatewords: 40 }}</div>
-    </a>
-    {% endfor %}
+    <div class="post-list">
+      {% for post in site.posts %}
+      <a class="post-item" href="{{ post.url }}" data-delay="{{ forloop.index0 | times: 80 }}">
+        <div class="post-date">{{ post.date | date: "%B %d, %Y" }}</div>
+        <div class="post-title">{{ post.title }}</div>
+        <div class="post-excerpt">{{ post.content | strip_html | truncatewords: 40 }}</div>
+      </a>
+      {% endfor %}
+    </div>
   </div>
 
   <script>
@@ -255,20 +240,15 @@ layout: null
     const saved = localStorage.getItem('theme');
     if (saved) setTheme(saved);
 
-    // ═══════════════ SPHERE COLOR STATE ═══════════════
-    const SPHERE_COLORS = {
-      all:     { dark: [193,137,63],  light: [147,96,31] },
-      finance: { dark: [79,122,92],   light: [58,96,68] },
-      ml:      { dark: [168,80,58],   light: [140,62,42] },
-    };
-    let sphereColor = SPHERE_COLORS.all;
+    // ═══════════════ SPHERE COLOR ═══════════════
+    const sphereColor = { dark: [180,220,245], light: [130,190,230] };
 
     // ═══════════════ PARTICLE SPHERE ═══════════════
     (function() {
       const canvas = document.getElementById('particle-bg');
       const ctx = canvas.getContext('2d');
       let w, h, dpr;
-      const NUM = 1400;
+      const NUM = 2000;
       const points = [];
       let angleX = 0, angleY = 0;
 
@@ -328,10 +308,10 @@ layout: null
         projected.sort((a, b) => a.z - b.z);
 
         for (const p of projected) {
-          const alpha = 0.04 + p.depth * 0.2;
-          const r = 0.6 + p.depth * 1.6;
+          const alpha = 0.07 + p.depth * 0.3;
+          const r = 1.0 + p.depth * 2.0;
           const c = light ? sphereColor.light : sphereColor.dark;
-          ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${light ? alpha * 0.5 : alpha})`;
+          ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${light ? alpha * 0.7 : alpha})`;
           ctx.beginPath();
           ctx.arc(p.sx, p.sy, r, 0, Math.PI * 2);
           ctx.fill();
@@ -341,23 +321,6 @@ layout: null
       }
       draw();
     })();
-
-    // Topic filter
-    document.querySelectorAll('.topic-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        sphereColor = SPHERE_COLORS[filter] || SPHERE_COLORS.all;
-        document.querySelectorAll('.post-item').forEach(item => {
-          if (filter === 'all' || item.dataset.topic === filter) {
-            item.classList.remove('hidden');
-          } else {
-            item.classList.add('hidden');
-          }
-        });
-      });
-    });
 
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
