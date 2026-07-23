@@ -4,44 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ page.title }} — Claire Shin</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    @font-face {
-      font-family: 'Craftwork Grotesk';
-      src: url('https://font.download/cdn/webfont/craftwork-grotesk/CraftworkGrotesk-Regular.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0a0e;
-      --text: #e8e6e1;
-      --text-mid: rgba(255,255,255,0.4);
-      --text-dim: rgba(255,255,255,0.25);
-      --card-bg: rgba(255,255,255,0.02);
-      --card-border: rgba(255,255,255,0.06);
-      --shadow-hover: rgba(0,0,0,0.4);
-      --link-color: #7b68ee;
-      --code-bg: rgba(255,255,255,0.06);
+      --bg: #17150f;
+      --text: #ece5d3;
+      --text-mid: rgba(236,229,211,0.52);
+      --text-dim: rgba(236,229,211,0.32);
+      --card-border: rgba(236,229,211,0.1);
+      --link-color: #c1893f;
+      --code-bg: rgba(236,229,211,0.06);
     }
     :root.light {
-      --bg: #eef2f7;
-      --text: #4a4a4e;
-      --text-mid: rgba(0,0,0,0.45);
-      --text-dim: rgba(0,0,0,0.3);
-      --card-bg: rgba(0,0,0,0.03);
-      --card-border: rgba(0,0,0,0.08);
-      --shadow-hover: rgba(0,0,0,0.1);
-      --link-color: #5b4bc7;
-      --code-bg: rgba(0,0,0,0.05);
+      --bg: #f3ede0;
+      --text: #33301f;
+      --text-mid: rgba(51,48,31,0.55);
+      --text-dim: rgba(51,48,31,0.38);
+      --card-border: rgba(51,48,31,0.12);
+      --link-color: #93601f;
+      --code-bg: rgba(51,48,31,0.06);
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-family: 'Work Sans', system-ui, sans-serif;
       overflow-x: hidden;
       min-height: 100vh;
       transition: background 0.4s ease, color 0.4s ease;
@@ -49,65 +38,52 @@
 
     /* ── NAV ── */
     .nav {
-      padding: 24px 32px;
+      padding: 22px 32px;
       border-bottom: 1px solid var(--card-border);
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
       transition: border-color 0.4s ease;
     }
-    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
     .nav a {
       color: var(--text-mid);
       text-decoration: none;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 14px;
       transition: color 0.3s;
     }
-    .nav a:hover { color: var(--text); }
+    .nav a:hover { color: var(--link-color); }
     .theme-toggle {
       background: none;
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 6px 12px;
+      border: none;
       cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: var(--text-mid);
-      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 13px;
+      color: var(--text-dim);
+      transition: color 0.3s;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
-    .theme-toggle:hover {
-      color: var(--text);
-      border-color: var(--text-mid);
-      background: var(--card-bg);
-    }
-    .theme-toggle .icon { font-size: 13px; }
+    .theme-toggle:hover { color: var(--link-color); }
 
     /* ── ARTICLE ── */
     .article {
-      max-width: 680px;
+      max-width: 660px;
       margin: 0 auto;
       padding: 60px 32px 80px;
     }
     .article-date {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
       color: var(--text-dim);
-      text-transform: uppercase;
       margin-bottom: 12px;
     }
     .article h1 {
-      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: clamp(28px, 5vw, 40px);
       font-weight: 400;
-      letter-spacing: -0.5px;
+      font-style: italic;
       line-height: 1.2;
       margin-bottom: 40px;
     }
@@ -120,17 +96,15 @@
     }
     .prose p { margin-bottom: 24px; }
     .prose h2 {
-      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: 24px;
       font-weight: 400;
-      letter-spacing: -0.3px;
       margin: 48px 0 20px;
     }
     .prose h3 {
-      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: 20px;
       font-weight: 400;
-      letter-spacing: -0.3px;
       margin: 36px 0 16px;
     }
     .prose a {
@@ -154,16 +128,14 @@
       font-style: italic;
     }
     .prose code {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
       background: var(--code-bg);
       padding: 2px 6px;
-      border-radius: 4px;
     }
     .prose pre {
       background: var(--code-bg);
       padding: 20px;
-      border-radius: 8px;
       overflow-x: auto;
       margin: 24px 0;
       border: 1px solid var(--card-border);
@@ -174,7 +146,6 @@
     }
     .prose img {
       max-width: 100%;
-      border-radius: 8px;
       margin: 24px 0;
     }
     .prose hr {
@@ -186,25 +157,22 @@
 
     /* ── BACK LINK ── */
     .back {
-      max-width: 680px;
+      max-width: 660px;
       margin: 0 auto;
       padding: 0 32px 60px;
     }
     .back a {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      letter-spacing: 2px;
+      font-size: 14px;
       color: var(--text-dim);
       text-decoration: none;
-      text-transform: uppercase;
       transition: color 0.3s;
     }
-    .back a:hover { color: var(--text); }
+    .back a:hover { color: var(--link-color); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       .article, .back { padding-left: 20px; padding-right: 20px; }
-      .nav { padding: 20px; }
+      .nav { padding: 18px 20px; }
     }
   </style>
 </head>

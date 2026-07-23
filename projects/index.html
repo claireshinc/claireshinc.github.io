@@ -9,56 +9,43 @@ layout: null
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — Claire Shin</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    @font-face {
-      font-family: 'Craftwork Grotesk';
-      src: url('https://font.download/cdn/webfont/craftwork-grotesk/CraftworkGrotesk-Regular.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0a0e;
-      --text: #e8e6e1;
-      --text-mid: rgba(255,255,255,0.4);
-      --text-dim: rgba(255,255,255,0.25);
-      --card-bg: rgba(255,255,255,0.02);
-      --card-border: rgba(255,255,255,0.06);
-      --card-desc: rgba(255,255,255,0.45);
-      --tech-bg: rgba(255,255,255,0.04);
-      --tech-border: rgba(255,255,255,0.08);
-      --tech-text: rgba(255,255,255,0.4);
-      --arrow: rgba(255,255,255,0.15);
-      --shadow-hover: rgba(0,0,0,0.4);
+      --bg: #17150f;
+      --text: #ece5d3;
+      --text-mid: rgba(236,229,211,0.52);
+      --text-dim: rgba(236,229,211,0.32);
+      --card-bg: rgba(236,229,211,0.025);
+      --card-border: rgba(236,229,211,0.1);
+      --card-desc: rgba(236,229,211,0.55);
+      --tech-border: rgba(236,229,211,0.18);
+      --tech-text: rgba(236,229,211,0.5);
+      --shadow-hover: rgba(0,0,0,0.3);
       --sigil-opacity: 0.35;
       --sigil-hover-opacity: 0.55;
-      --canvas-fade: rgba(10,10,14,0.06);
     }
     :root.light {
-      --bg: #eef2f7;
-      --text: #4a4a4e;
-      --text-mid: rgba(0,0,0,0.45);
-      --text-dim: rgba(0,0,0,0.3);
-      --card-bg: rgba(0,0,0,0.03);
-      --card-border: rgba(0,0,0,0.08);
-      --card-desc: rgba(0,0,0,0.5);
-      --tech-bg: rgba(0,0,0,0.04);
-      --tech-border: rgba(0,0,0,0.1);
-      --tech-text: rgba(0,0,0,0.45);
-      --arrow: rgba(0,0,0,0.2);
-      --shadow-hover: rgba(0,0,0,0.1);
+      --bg: #f3ede0;
+      --text: #33301f;
+      --text-mid: rgba(51,48,31,0.55);
+      --text-dim: rgba(51,48,31,0.38);
+      --card-bg: rgba(51,48,31,0.025);
+      --card-border: rgba(51,48,31,0.12);
+      --card-desc: rgba(51,48,31,0.6);
+      --tech-border: rgba(51,48,31,0.22);
+      --tech-text: rgba(51,48,31,0.55);
+      --shadow-hover: rgba(51,48,31,0.1);
       --sigil-opacity: 0.2;
       --sigil-hover-opacity: 0.35;
-      --canvas-fade: rgba(238,242,247,0.06);
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-family: 'Work Sans', system-ui, sans-serif;
       overflow-x: hidden;
       min-height: 100vh;
       transition: background 0.4s ease, color 0.4s ease;
@@ -66,47 +53,35 @@ layout: null
 
     /* ── NAV ── */
     .nav {
-      padding: 24px 32px;
+      padding: 22px 32px;
       border-bottom: 1px solid var(--card-border);
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
       transition: border-color 0.4s ease;
     }
-    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
     .nav a {
       color: var(--text-mid);
       text-decoration: none;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 14px;
       transition: color 0.3s;
     }
     .nav a:hover { color: var(--text); }
 
-    /* ── THEME TOGGLE ── */
     .theme-toggle {
       background: none;
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 6px 12px;
+      border: none;
       cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: var(--text-mid);
-      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 13px;
+      color: var(--text-dim);
+      transition: color 0.3s;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
-    .theme-toggle:hover {
-      color: var(--text);
-      border-color: var(--text-mid);
-      background: var(--card-bg);
-    }
-    .theme-toggle .icon { font-size: 13px; }
+    .theme-toggle:hover { color: var(--text); }
 
     /* ── HEADER ── */
     .header {
@@ -115,18 +90,16 @@ layout: null
       margin: 0 auto;
     }
     .header-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
       color: var(--text-dim);
-      text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .header h1 {
-      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: clamp(28px, 5vw, 42px);
       font-weight: 400;
-      letter-spacing: -0.5px;
+      font-style: italic;
       line-height: 1.2;
       margin-bottom: 12px;
     }
@@ -146,13 +119,14 @@ layout: null
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-auto-rows: minmax(260px, auto);
-      gap: 20px;
+      gap: 1px;
+      background: var(--card-border);
+      border: 1px solid var(--card-border);
     }
 
     /* ── CARD ── */
     .card {
       position: relative;
-      border-radius: 14px;
       overflow: hidden;
       cursor: pointer;
       text-decoration: none;
@@ -161,52 +135,24 @@ layout: null
       flex-direction: column;
       justify-content: flex-end;
       padding: 28px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.4s ease,
-                  background 0.4s ease;
-      /* entry animation */
+      background: var(--bg);
+      border-left: 2px solid transparent;
+      transition: border-color 0.35s ease, background 0.4s ease;
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(18px);
     }
     .card.visible {
       opacity: 1;
       transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease;
     }
     .card.hero {
       grid-column: span 2;
       min-height: 320px;
     }
     .card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 20px 60px var(--shadow-hover);
-    }
-
-    /* spotlight glow */
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: radial-gradient(
-        400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        var(--glow-color, rgba(123,104,238,0.08)),
-        transparent 60%
-      );
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 1;
-    }
-    .card:hover::before { opacity: 1; }
-
-    /* border glow on hover */
-    .card:hover {
-      border-color: var(--accent-dim, rgba(123,104,238,0.2));
+      border-left-color: var(--accent, #c1893f);
+      background: var(--card-bg);
     }
 
     /* canvas sigil */
@@ -227,23 +173,20 @@ layout: null
       z-index: 2;
     }
     .card-tag {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
       margin-bottom: 10px;
-      opacity: 0.5;
+      opacity: 0.75;
     }
     .card-title {
-      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: clamp(20px, 2.5vw, 28px);
       font-weight: 400;
-      letter-spacing: -0.3px;
       margin-bottom: 8px;
       line-height: 1.25;
       transition: color 0.3s ease;
     }
-    .card:hover .card-title { color: var(--accent, #7b68ee); }
+    .card:hover .card-title { color: var(--accent, #c1893f); }
     .card-desc {
       font-size: 15px;
       line-height: 1.65;
@@ -254,32 +197,28 @@ layout: null
     .card-tech {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 14px;
+      gap: 8px;
+      margin-top: 16px;
     }
     .card-tech span {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      background: var(--tech-bg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 8px;
       border: 1px solid var(--tech-border);
       color: var(--tech-text);
     }
     .card-arrow {
       position: absolute;
-      top: 24px;
-      right: 24px;
+      top: 26px;
+      right: 26px;
       z-index: 2;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 18px;
-      color: var(--arrow);
-      transition: color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      font-size: 16px;
+      color: var(--text-dim);
+      transition: color 0.3s, transform 0.3s ease;
     }
     .card:hover .card-arrow {
-      color: var(--accent, #7b68ee);
-      transform: translate(3px, -3px);
+      color: var(--accent, #c1893f);
+      transform: translate(2px, -2px);
     }
 
     /* ── PHILOSOPHY LINK ── */
@@ -291,44 +230,40 @@ layout: null
     .philosophy-link a {
       display: block;
       position: relative;
-      border-radius: 14px;
       padding: 32px;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
+      border-left: 2px solid transparent;
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.3s, box-shadow 0.3s, background 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: border-color 0.3s ease, background 0.4s ease;
       overflow: hidden;
-      /* entry animation */
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(18px);
     }
     .philosophy-link a.visible {
       opacity: 1;
       transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
     }
     .philosophy-link a:hover {
-      border-color: rgba(123,104,238,0.2);
-      box-shadow: 0 12px 40px var(--shadow-hover);
-      transform: translateY(-3px);
+      border-left-color: #c1893f;
     }
     .philosophy-link .pl-tag {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
       color: var(--text-dim);
       margin-bottom: 8px;
     }
     .philosophy-link .pl-title {
-      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: clamp(20px, 2.5vw, 26px);
       font-weight: 400;
-      letter-spacing: -0.3px;
+      font-style: italic;
       margin-bottom: 6px;
       transition: color 0.3s;
     }
-    .philosophy-link a:hover .pl-title { color: #7b68ee; }
+    .philosophy-link a:hover .pl-title { color: #c1893f; }
     .philosophy-link .pl-desc {
       font-size: 15px;
       color: var(--text-mid);
@@ -378,12 +313,12 @@ layout: null
     <a class="card hero"
        href="https://volsurface-dislocation.streamlit.app/"
        target="_blank" rel="noopener"
-       style="--accent: #7b68ee; --accent-dim: rgba(123,104,238,0.2); --glow-color: rgba(123,104,238,0.08);"
+       style="--accent: #c1893f;"
        data-delay="0">
       <canvas data-sigil="volsurface"></canvas>
       <span class="card-arrow">&#8599;</span>
       <div class="card-content">
-        <div class="card-tag" style="color: #7b68ee;">Options & Derivatives</div>
+        <div class="card-tag" style="color: #c1893f;">Options & Derivatives</div>
         <div class="card-title">Volatility Archaeologist</div>
         <div class="card-desc">
           SVI surface fitting, feature extraction, and anomaly detection for options markets. Finds mispricings by comparing current surface geometry to historical distributions — then generates trade ideas.
@@ -402,12 +337,12 @@ layout: null
     <a class="card"
        href="https://sector-momentum.streamlit.app/"
        target="_blank" rel="noopener"
-       style="--accent: #ef476f; --accent-dim: rgba(239,71,111,0.2); --glow-color: rgba(239,71,111,0.08);"
-       data-delay="100">
+       style="--accent: #a8503a;"
+       data-delay="80">
       <canvas data-sigil="momentum"></canvas>
       <span class="card-arrow">&#8599;</span>
       <div class="card-content">
-        <div class="card-tag" style="color: #ef476f;">Systematic Equities</div>
+        <div class="card-tag" style="color: #a8503a;">Systematic Equities</div>
         <div class="card-title">Sector Momentum</div>
         <div class="card-desc">
           Crash-aware long/short sector momentum with sentiment gating. Runs three crash controllers as counterfactuals against the same baseline.
@@ -423,12 +358,12 @@ layout: null
     <!-- Thesis OS -->
     <a class="card"
        href="/projects/thesis-os/"
-       style="--accent: #06d6a0; --accent-dim: rgba(6,214,160,0.2); --glow-color: rgba(6,214,160,0.08);"
-       data-delay="200">
+       style="--accent: #4f7a5c;"
+       data-delay="160">
       <canvas data-sigil="thesis"></canvas>
       <span class="card-arrow">&#8599;</span>
       <div class="card-content">
-        <div class="card-tag" style="color: #06d6a0;">Fundamental Equity PM</div>
+        <div class="card-tag" style="color: #4f7a5c;">Fundamental Equity PM</div>
         <div class="card-title">Thesis OS</div>
         <div class="card-desc">
           Structured briefs and investment theses compiled into testable claims with kill criteria. Decision artifacts for fundamental equity PMs.
@@ -446,7 +381,7 @@ layout: null
 
   <!-- Philosophy project link -->
   <div class="philosophy-link">
-    <a href="/projects/philosophy/" data-delay="300">
+    <a href="/projects/philosophy/" data-delay="240">
       <div class="pl-tag">Interactive Essay</div>
       <div class="pl-title">Philosophy as Mathematics</div>
       <div class="pl-desc">
@@ -485,15 +420,6 @@ layout: null
     const saved = localStorage.getItem('theme');
     if (saved) setTheme(saved);
 
-    // ═══════════════ SPOTLIGHT GLOW ═══════════════
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
-        card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
-      });
-    });
-
     // ═══════════════ SCROLL REVEAL ═══════════════
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -507,13 +433,7 @@ layout: null
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.card, .philosophy-link a').forEach(el => {
-      el.style.transition = `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0s,
-                             transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0s,
-                             box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                             border-color 0.4s ease`;
-      observer.observe(el);
-    });
+    document.querySelectorAll('.card, .philosophy-link a').forEach(el => observer.observe(el));
 
     // ═══════════════ GENERATIVE SIGILS ═══════════════
     function initSigils() {
@@ -538,7 +458,7 @@ layout: null
     // Vol surface: a stylized volatility smile mesh
     function drawVolSurface(ctx, w, h) {
       const rows = 12, cols = 24;
-      ctx.strokeStyle = isLight() ? 'rgba(123,104,238,0.18)' : 'rgba(123,104,238,0.12)';
+      ctx.strokeStyle = isLight() ? 'rgba(193,137,63,0.2)' : 'rgba(193,137,63,0.14)';
       ctx.lineWidth = 0.8;
       for (let r = 0; r < rows; r++) {
         ctx.beginPath();
@@ -556,7 +476,7 @@ layout: null
       // vertical wisps
       for (let c = 0; c < cols; c += 3) {
         ctx.beginPath();
-        ctx.strokeStyle = isLight() ? 'rgba(123,104,238,0.08)' : 'rgba(184,169,255,0.04)';
+        ctx.strokeStyle = isLight() ? 'rgba(193,137,63,0.09)' : 'rgba(224,185,130,0.05)';
         for (let r = 0; r < rows; r++) {
           const x = (c / cols) * w;
           const yBase = h * 0.25 + (r / rows) * h * 0.55;
@@ -577,7 +497,7 @@ layout: null
         ctx.beginPath();
         const base = isLight() ? 0.1 : 0.06;
         const alpha = base + i * 0.02;
-        ctx.strokeStyle = `rgba(239,71,111,${alpha})`;
+        ctx.strokeStyle = `rgba(168,80,58,${alpha})`;
         ctx.lineWidth = 1 + i * 0.3;
         const freq = 2 + i * 0.7;
         const amp = h * (0.08 + i * 0.04);
@@ -608,8 +528,8 @@ layout: null
           ctx.beginPath();
           ctx.moveTo(x, y);
           ctx.lineTo(nx, ny);
-          const tBase = isLight() ? 0.14 : 0.08;
-          ctx.strokeStyle = `rgba(6,214,160,${tBase - depth * 0.012})`;
+          const tBase = isLight() ? 0.16 : 0.09;
+          ctx.strokeStyle = `rgba(79,122,92,${tBase - depth * 0.012})`;
           ctx.lineWidth = 2 - depth * 0.35;
           ctx.stroke();
           addBranch(nx, ny, depth + 1, a);
@@ -621,8 +541,8 @@ layout: null
         const r = 2.5 - n.depth * 0.4;
         ctx.beginPath();
         ctx.arc(n.x, n.y, Math.max(r, 0.8), 0, Math.PI * 2);
-        const nBase = isLight() ? 0.2 : 0.12;
-        ctx.fillStyle = `rgba(6,214,160,${nBase - n.depth * 0.02})`;
+        const nBase = isLight() ? 0.22 : 0.13;
+        ctx.fillStyle = `rgba(79,122,92,${nBase - n.depth * 0.02})`;
         ctx.fill();
       });
     }
@@ -704,9 +624,9 @@ layout: null
           const alpha = 0.06 + p.depth * 0.3;
           const sz = 0.6 + p.depth * 1.6;
           if (light) {
-            ctx.fillStyle = `rgba(100,50,160,${alpha * 0.45})`;
+            ctx.fillStyle = `rgba(147,96,31,${alpha * 0.45})`;
           } else {
-            ctx.fillStyle = `rgba(123,104,238,${alpha})`;
+            ctx.fillStyle = `rgba(193,137,63,${alpha})`;
           }
           ctx.beginPath();
           ctx.arc(p.sx, p.sy, sz, 0, Math.PI * 2);

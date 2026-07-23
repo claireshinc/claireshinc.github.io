@@ -7,42 +7,39 @@ layout: null
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Claire Shin</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    @font-face {
-      font-family: 'Craftwork Grotesk';
-      src: url('https://font.download/cdn/webfont/craftwork-grotesk/CraftworkGrotesk-Regular.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0a0e;
-      --text: #e8e6e1;
-      --text-mid: rgba(255,255,255,0.4);
-      --text-dim: rgba(255,255,255,0.25);
-      --card-bg: rgba(255,255,255,0.02);
-      --card-border: rgba(255,255,255,0.06);
-      --card-desc: rgba(255,255,255,0.45);
-      --shadow-hover: rgba(0,0,0,0.4);
+      --bg: #17150f;
+      --text: #ece5d3;
+      --text-mid: rgba(236,229,211,0.52);
+      --text-dim: rgba(236,229,211,0.32);
+      --card-bg: rgba(236,229,211,0.03);
+      --card-border: rgba(236,229,211,0.1);
+      --card-desc: rgba(236,229,211,0.55);
+      --shadow-hover: rgba(0,0,0,0.35);
+      --accent: #c1893f;
+      --accent-dim: rgba(193,137,63,0.35);
     }
     :root.light {
-      --bg: #eef2f7;
-      --text: #4a4a4e;
-      --text-mid: rgba(0,0,0,0.45);
-      --text-dim: rgba(0,0,0,0.3);
-      --card-bg: rgba(0,0,0,0.03);
-      --card-border: rgba(0,0,0,0.08);
-      --card-desc: rgba(0,0,0,0.5);
-      --shadow-hover: rgba(0,0,0,0.1);
+      --bg: #f3ede0;
+      --text: #33301f;
+      --text-mid: rgba(51,48,31,0.55);
+      --text-dim: rgba(51,48,31,0.38);
+      --card-bg: rgba(51,48,31,0.03);
+      --card-border: rgba(51,48,31,0.12);
+      --card-desc: rgba(51,48,31,0.6);
+      --shadow-hover: rgba(51,48,31,0.1);
+      --accent: #93601f;
+      --accent-dim: rgba(147,96,31,0.3);
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-family: 'Work Sans', system-ui, sans-serif;
       overflow-x: hidden;
       min-height: 100vh;
       transition: background 0.4s ease, color 0.4s ease;
@@ -50,139 +47,98 @@ layout: null
 
     /* ── NAV ── */
     .nav {
-      padding: 24px 32px;
+      padding: 22px 32px;
       border-bottom: 1px solid var(--card-border);
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
       transition: border-color 0.4s ease;
     }
     .nav-left a {
       color: var(--text);
       text-decoration: none;
-      font-family: 'IBM Plex Sans', system-ui, sans-serif;
-      font-size: 20px;
-      font-weight: 400;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 19px;
       font-style: italic;
-      transition: color 0.3s;
+      font-weight: 500;
     }
-    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
     .nav-links a {
       color: var(--text-mid);
       text-decoration: none;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 14px;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: var(--accent); }
     .theme-toggle {
       background: none;
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 6px 12px;
+      border: none;
       cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: var(--text-mid);
-      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 13px;
+      color: var(--text-dim);
+      transition: color 0.3s;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
-    .theme-toggle:hover {
-      color: var(--text);
-      border-color: var(--text-mid);
-      background: var(--card-bg);
-    }
-    .theme-toggle .icon { font-size: 13px; }
+    .theme-toggle:hover { color: var(--accent); }
 
     /* ── HEADER ── */
     .header {
-      padding: 60px 32px 48px;
-      max-width: 900px;
+      padding: 56px 32px 40px;
+      max-width: 860px;
       margin: 0 auto;
     }
-    .header-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .header h1 {
-      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
-      font-size: clamp(32px, 6vw, 48px);
-      font-weight: 400;
-      letter-spacing: -0.5px;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
     .header p {
-      font-size: 20px;
-      line-height: 1.75;
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-size: 22px;
       color: var(--text-mid);
-      font-weight: 300;
-      max-width: 520px;
+      font-weight: 400;
     }
 
     /* ── POSTS ── */
     .posts {
-      max-width: 900px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 0 32px 80px;
     }
     .posts-header {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
       border-bottom: 1px solid var(--card-border);
     }
     .posts-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 4px;
+      font-size: 13px;
+      letter-spacing: 0.5px;
       color: var(--text-dim);
-      text-transform: uppercase;
     }
     .topic-filters {
       display: flex;
-      gap: 6px;
+      gap: 18px;
     }
     .topic-btn {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 1px;
-      padding: 4px 12px;
-      border-radius: 20px;
-      border: 1px solid var(--card-border);
+      font-family: 'Work Sans', sans-serif;
+      font-size: 13px;
+      padding: 0 0 4px;
+      border: none;
+      border-bottom: 1px solid transparent;
       background: none;
       color: var(--text-dim);
       cursor: pointer;
-      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      transition: color 0.3s, border-color 0.3s;
     }
-    .topic-btn:hover {
-      color: var(--text);
-      border-color: var(--text-mid);
-    }
+    .topic-btn:hover { color: var(--text); }
     .topic-btn.active {
       color: var(--text);
-      border-color: #7b68ee;
-      background: rgba(123,104,238,0.1);
+      border-bottom-color: var(--accent);
     }
-    .topic-btn[data-filter="finance"].active {
-      border-color: #06d6a0;
-      background: rgba(6,214,160,0.1);
-    }
-    .topic-btn[data-filter="ml"].active {
-      border-color: #f59e0b;
-      background: rgba(245,158,11,0.1);
-    }
+    .topic-btn[data-filter="finance"].active { border-bottom-color: #4f7a5c; }
+    .topic-btn[data-filter="ml"].active { border-bottom-color: #a8503a; }
     .post-item.hidden {
       display: none;
     }
@@ -190,52 +146,40 @@ layout: null
       display: block;
       text-decoration: none;
       color: inherit;
-      padding: 28px;
-      margin-bottom: 16px;
-      border-radius: 14px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.3s ease,
-                  background 0.4s ease;
+      padding: 24px 4px;
+      border-bottom: 1px solid var(--card-border);
+      transition: border-color 0.3s ease, padding-left 0.3s ease;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(14px);
     }
     .post-item.visible {
       opacity: 1;
       transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .post-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px var(--shadow-hover);
-      border-color: rgba(123,104,238,0.2);
+      padding-left: 14px;
+      border-bottom-color: var(--accent-dim);
     }
-    .post-item[data-topic="finance"]:hover {
-      border-color: rgba(6,214,160,0.2);
-    }
-    .post-item[data-topic="ml"]:hover {
-      border-color: rgba(245,158,11,0.2);
-    }
+    .post-item[data-topic="finance"]:hover { border-bottom-color: rgba(79,122,92,0.5); }
+    .post-item[data-topic="ml"]:hover { border-bottom-color: rgba(168,80,58,0.5); }
     .post-date {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
       color: var(--text-dim);
       margin-bottom: 8px;
     }
     .post-title {
-      font-family: 'Craftwork Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
-      font-size: clamp(20px, 2.5vw, 26px);
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(20px, 2.4vw, 25px);
       font-weight: 400;
-      letter-spacing: -0.3px;
       line-height: 1.3;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       transition: color 0.3s;
     }
-    .post-item:hover .post-title { color: #7b68ee; }
-    .post-item[data-topic="finance"]:hover .post-title { color: #06d6a0; }
-    .post-item[data-topic="ml"]:hover .post-title { color: #f59e0b; }
+    .post-item:hover .post-title { color: var(--accent); }
+    .post-item[data-topic="finance"]:hover .post-title { color: #4f7a5c; }
+    .post-item[data-topic="ml"]:hover .post-title { color: #a8503a; }
     .post-excerpt {
       font-size: 15px;
       line-height: 1.7;
@@ -256,7 +200,7 @@ layout: null
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       .header, .posts { padding-left: 20px; padding-right: 20px; }
-      .nav { padding: 20px; }
+      .nav { padding: 18px 20px; }
     }
   </style>
 </head>
@@ -275,7 +219,7 @@ layout: null
   </nav>
 
   <div class="header">
-    <p>Learning notes</p>
+    <p>Learning notes.</p>
   </div>
 
   <div class="posts">
@@ -288,7 +232,7 @@ layout: null
       </div>
     </div>
     {% for post in site.posts %}
-    <a class="post-item" href="{{ post.url }}" data-delay="{{ forloop.index0 | times: 100 }}" data-topic="{{ post.topic }}">
+    <a class="post-item" href="{{ post.url }}" data-delay="{{ forloop.index0 | times: 80 }}" data-topic="{{ post.topic }}">
       <div class="post-date">{{ post.date | date: "%B %d, %Y" }}</div>
       <div class="post-title">{{ post.title }}</div>
       <div class="post-excerpt">{{ post.content | strip_html | truncatewords: 40 }}</div>
@@ -313,9 +257,9 @@ layout: null
 
     // ═══════════════ SPHERE COLOR STATE ═══════════════
     const SPHERE_COLORS = {
-      all:     { dark: [123,104,238], light: [90,70,180] },
-      finance: { dark: [6,214,160],   light: [4,160,120] },
-      ml:      { dark: [245,158,11],  light: [180,110,8] },
+      all:     { dark: [193,137,63],  light: [147,96,31] },
+      finance: { dark: [79,122,92],   light: [58,96,68] },
+      ml:      { dark: [168,80,58],   light: [140,62,42] },
     };
     let sphereColor = SPHERE_COLORS.all;
 
@@ -425,10 +369,7 @@ layout: null
         }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.post-item').forEach(el => {
-      el.style.transition = `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease`;
-      observer.observe(el);
-    });
+    document.querySelectorAll('.post-item').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
