@@ -31,8 +31,6 @@ github_username:  claireshinc
 theme: minima
 plugins:
   - jekyll-feed
-header_pages:
-  - projects/index.html
 
 # Exclude from processing.
 # The following items will not be processed, by default.
