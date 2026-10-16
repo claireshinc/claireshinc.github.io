@@ -3,6 +3,7 @@ layout: post
 title:  "Why a DNN's \"eyesight\" matters, not just its brain"
 date:   2025-12-18
 topic: ml
+published: false
 ---
 
 Paper 1. Unexplored Faces of Robustness and Out-of-Distribution: Covariate Shifts in Environment and Sensor Domains - Eunsu Baek, Keondo Park, Jiyoon Kim, Hyung-Sin Kim
